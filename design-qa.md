@@ -1,85 +1,68 @@
-# Design QA
+# Design QA — Apple-style bilingual portfolio refresh
 
-## Comparison target
+## Evidence
 
-- Source visual truth: `/Users/shawnshoper/Documents/ChatGPT/github-index/work/qa/design-reference.png`
-- Final desktop implementation: `/Users/shawnshoper/Documents/ChatGPT/github-index/work/qa/implementation-desktop.png`
-- Mobile evidence: `/Users/shawnshoper/Documents/ChatGPT/github-index/work/qa/implementation-mobile.png`
-- Mobile project evidence: `/Users/shawnshoper/Documents/ChatGPT/github-index/work/qa/implementation-mobile-work.png`
-- Tablet evidence: `/Users/shawnshoper/Documents/ChatGPT/github-index/work/qa/implementation-tablet.png`
-- Full-view comparison: `/Users/shawnshoper/Documents/ChatGPT/github-index/work/qa/design-comparison.png`
-- Focused hero comparison: `/Users/shawnshoper/Documents/ChatGPT/github-index/work/qa/design-comparison-hero.png`
-- Focused project comparison: `/Users/shawnshoper/Documents/ChatGPT/github-index/work/qa/design-comparison-project.png`
+- Source visual truth: `/Users/shawnshoper/.codex/generated_images/019fe7bc-dbf3-75d3-aa5c-085bb79f6e26/exec-c5756327-fb0a-449c-84a6-3c99d22c0f3d.png`
+- Source dimensions: `880 × 1788` pixels.
+- Normalized source crop: `work/qa/source-v3-top.png`, top `880 × 1000` pixels.
+- Desktop implementation, matching English state: `work/qa/implementation-desktop-english-top.png`, CSS viewport and pixels `880 × 1000`, device scale factor `1`.
+- Side-by-side comparison: `work/qa/compare-desktop-top.png`, `1760 × 1000` pixels; source on the left, implementation on the right.
+- Chinese desktop implementation: `work/qa/implementation-desktop-top.png`, `880 × 1000` pixels.
+- Desktop scroll-story state: `work/qa/implementation-desktop-story.png`, CSS viewport and pixels `1440 × 1000`, device scale factor `1`.
+- Mobile hero: `work/qa/implementation-mobile-top.png`, CSS viewport and pixels `390 × 844`, device scale factor `1`.
+- Mobile story: `work/qa/implementation-mobile-story.png`, CSS viewport and pixels `390 × 844`, device scale factor `1`.
+- Browser state: local Vite preview, unauthenticated public portfolio, dark theme.
 
-## Viewport and normalization
+## Full-view comparison
 
-- Source: 880 x 1788 pixels.
-- Desktop implementation: 1440 x 3412 CSS pixels and screenshot pixels, device pixel ratio 1.
-- Full comparison normalization: desktop implementation downsampled to 880 pixels wide (880 x 2085); source kept at its native 880-pixel width.
-- Responsive evidence: 768 x 1024 tablet and 390 x 844 mobile, device pixel ratio 1.
-- State: dark theme, hero at rest, Storage gallery tab selected for the final desktop comparison.
+The normalized English comparison preserves the selected Aurora Product Journal direction: dark navy base, real product imagery, blue-violet halo, centered editorial hero, restrained pill CTAs and high-contrast typography. The implementation intentionally adds a glass navigation capsule for the required language control and places the real TraceHalo screenshot lower and smaller at the initial frame because it expands to full emphasis as the user scrolls.
 
-## Browser verification
+The selected mock contains an invented dashboard. The implementation correctly substitutes the real TraceHalo repository screenshots, as required, while preserving the frame, crop, border, radius, shadow and surrounding aurora treatment.
 
-- Primary navigation was rendered with working Work, About and GitHub targets.
-- Work navigation scrolled to the project section on mobile.
-- Storage, Live Monitor and Input Devices are semantic tabs; selecting Input Devices changed the product image to `/assets/tracehalo-input-devices.png`.
-- External GitHub profile and TraceHalo repository URLs were verified in the rendered DOM.
-- Desktop, tablet and mobile layouts were checked for horizontal overflow; rendered width matched each viewport.
-- Browser console warnings/errors checked: 0.
+## Focused-region comparison
 
-## Full-view comparison evidence
-
-The final implementation preserves the selected direction's midnight-indigo palette, luminous halo hero, centered editorial headline, two project CTAs, large dark product presentation, two-column TraceHalo chapter, three principles, aurora-backed menu-bar story and restrained maker footer. Product UI differs from the generated mock only where required to use real TraceHalo repository screenshots.
-
-## Focused comparison evidence
-
-- Hero: headline scale, centered hierarchy, halo placement, CTA grouping and dominant product frame match the source. The product frame contains the real TraceHalo Live Monitor screenshot rather than generated UI.
-- Project chapter: the final two-column layout, project title, screenshot weight and principles row now match the source hierarchy. The gallery uses real Storage, Live Monitor and Input Devices screenshots.
-- Menu-bar story: the source's stylized horizontal strip was adapted to show the complete, unmodified real vertical menu-bar screenshot. This intentionally increases section height but preserves truthful product imagery.
+- Hero typography and CTA region: Manrope display type, IBM Plex Mono eyebrow, negative display tracking, line height, button height, spacing and accent color match the source design language. English and Chinese variants both remain visually balanced.
+- Product frame: real screenshots remain sharp, undistorted and correctly sized. Desktop scroll states use only opacity, translation and scale; no fake UI, custom SVG illustration or placeholder asset is present.
+- Mobile: the header, language switcher, hero CTA stack and screenshot fit within `390px` with `scrollWidth === clientWidth === 390`. The scroll-driven desktop story becomes a complete vertical sequence so no information depends on animation.
+- A separate mobile source mock was not provided; the mobile pass therefore validates responsive hierarchy and product constraints rather than claiming pixel fidelity to an unavailable source state.
 
 ## Required fidelity surfaces
 
-- Fonts and typography: bundled Manrope and IBM Plex Mono reproduce the source's modern grotesk plus technical-label contrast. Heading weight, tracking, wrapping and body line length are consistent across desktop and responsive views.
-- Spacing and layout rhythm: hero and project proportions closely follow the source. Section boundaries, hairline separators, image frames and footer spacing remain consistent. No clipped controls or horizontal overflow were found.
-- Colors and visual tokens: deep navy surfaces, violet-blue emphasis, subdued dividers and soft cyan accents match the source direction with accessible foreground contrast.
-- Image quality and asset fidelity: hero, Storage, Input Devices, menu-bar panel and App icon are byte-identical copies of files in the TraceHalo repository. They retain their native aspect ratios and are not replaced by generated product UI. The only generated asset is the abstract non-product aurora background.
-- Copy and content: all TraceHalo claims are grounded in the repository README. No awards, client claims, fabricated usage metrics or additional named projects were introduced.
-- Icons: Phosphor Icons supplies the interface icons as one consistent library; no handcrafted SVG, CSS icon art or emoji substitutes are used.
-- Accessibility and behavior: semantic regions, descriptive alt text, visible focus states, reduced-motion handling, keyboard-compatible links/buttons and practical mobile tap targets are present.
+- Fonts and typography: passed. Manrope and IBM Plex Mono maintain the selected hierarchy. The Chinese headline was reduced at the mobile breakpoint after the first pass to remove an orphaned final character.
+- Spacing and layout rhythm: passed. Desktop uses large Apple-style breathing room and a pinned product stage; mobile collapses to readable sequential chapters without overlap or clipping.
+- Colors and visual tokens: passed. Navy, violet, periwinkle, cyan and translucent border tokens remain consistent with the selected source.
+- Image quality and asset fidelity: passed. Every product UI image and app icon is a real TraceHalo repository asset. The existing generated aurora is used only as an abstract background.
+- Copy and content: passed. All navigation, hero, story, principles, status, about, captions, metadata, alt text and labels have complete Chinese and English versions. First visit defaults to Chinese.
+- Icons: passed. All visible icons use the existing Phosphor icon library with consistent weight and alignment.
+- States and interactions: passed. Anchor navigation, external project links, Chinese/English switching, URL state, document `lang`, title, description and persisted preference were exercised.
+- Accessibility: passed. Semantic buttons and links, visible focus styles, descriptive alt text, a skip link and a full `prefers-reduced-motion` static fallback are present.
 
 ## Comparison history
 
-### Pass 1
+### Pass 1 — blocked
 
-- [P2] The initial project chapter placed the copy above a full-width screenshot, making the page substantially longer and changing the source hierarchy.
-- Fix: rebuilt the chapter as a two-column `project-showcase`, reduced excess vertical spacing and kept the screenshot gallery interactive.
-- Post-fix evidence: `design-comparison.png` and `design-comparison-project.png` show the project title at left, real project screenshot at right and the three principles below, matching the selected direction.
+- [P2] The Chinese mobile hero left the final character and punctuation on a third line at `390px`.
+  - Fix: reduced the mobile display-size clamp while preserving the two-line composition.
+- [P2] The real hero screenshot began too faint relative to the selected source.
+  - Fix: raised the initial product opacity while preserving the scroll-driven reveal to full opacity.
 
-### Pass 2
+### Pass 2 — passed
 
+- Post-fix evidence: `work/qa/implementation-mobile-top.png` and `work/qa/compare-desktop-top.png`.
 - No actionable P0, P1 or P2 differences remain.
-- Desktop, tablet and mobile captures show stable hierarchy, responsive stacking and no horizontal overflow.
+- Browser console warnings/errors from the page: `0`.
+- All visible product images loaded at their intrinsic dimensions when their sections entered the viewport.
 
-## Findings
+## Primary interactions tested
 
-- No actionable P0/P1/P2 findings.
-
-## Open questions
-
-- None blocking.
-
-## Implementation checklist
-
-- [x] Replace generated product UI with actual TraceHalo screenshots.
-- [x] Match the selected Aurora Product Journal hierarchy and palette.
-- [x] Implement responsive desktop, tablet and mobile layouts.
-- [x] Test primary navigation and screenshot tabs.
-- [x] Check console output and production build.
+- Desktop hero scroll: copy fades while the real product window scales and rises into focus.
+- Desktop story scroll: Live Monitor, Storage, Input Devices and Menu Bar screenshots crossfade with synchronized chapter text and progress.
+- Language switch: `中文` → `EN` produced `lang=en`, English metadata and `?lang=en`; switching back produced `lang=zh-CN`, Chinese metadata and removed the query parameter.
+- Mobile navigation and sequential story layout at `390 × 844`.
+- About anchor and lazy-loaded app icon.
 
 ## Follow-up polish
 
-- [P3] The real menu-bar screenshot is vertical, so that section is taller than the generated mock's fictional horizontal strip. This is intentional to preserve the user's real-image requirement.
-- [P3] The maker section uses the official TraceHalo icon instead of the mock's decorative SS monogram, prioritizing a real project asset.
+- [P3] A future pass could provide an alternate mobile-specific visual mock, but the current responsive interpretation is complete and usable.
 
 final result: passed

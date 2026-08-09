@@ -12,4 +12,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 - Recreate the selected "Aurora Product Journal" direction (the third displayed Product Design mock).
 - Product imagery must use real screenshots and the official icon from the TraceHalo repository. Do not replace product UI with generated mockups.
-- Keep the deliverable a static, responsive marketing page with lightweight animation and working project/GitHub interactions.
+- Keep the deliverable a static, responsive marketing page with working project/GitHub interactions.
+- Use Apple-style, scroll-driven product storytelling: a pinned hero reveal followed by a restrained, pinned sequence of real TraceHalo screenshots. Prefer transform/opacity choreography over decorative particles or novelty 3D effects.
+- Provide complete Simplified Chinese and English presentation. Default first visits to Chinese and place the language selector in the upper-right navigation; translate navigation, content, captions, metadata, and accessibility labels together.
+- Preserve a complete, readable static layout for mobile and `prefers-reduced-motion` users instead of requiring scroll animation to understand the content.
