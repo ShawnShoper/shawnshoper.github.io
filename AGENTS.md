@@ -18,3 +18,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Preserve a complete, readable static layout for mobile and `prefers-reduced-motion` users instead of requiring scroll animation to understand the content.
 - Present TraceHalo and Peek as two first-class products. Use a prominent, sticky product switcher with both icons, names, and short positioning copy; do not reduce product selection to a subtle navigation control.
 - Keep product state shareable with the short `p` query parameter (`?p=tracehalo` and `?p=peek`) while preserving the existing `lang` query parameter and in-page anchors.
+- Keep Peek marketing imagery synchronized with the files currently referenced by the Peek `master` README. When an official screenshot changes format or dimensions, replace the stale local asset and update its declared dimensions instead of keeping parallel old/new copies.

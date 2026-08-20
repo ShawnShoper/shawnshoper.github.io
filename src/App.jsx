@@ -244,9 +244,9 @@ const products = {
     order: "02",
     repo: "https://github.com/ShawnShoper/peek",
     icon: "/assets/peek-icon.png",
-    heroImage: { src: "/assets/peek-file-search.jpeg", width: 920, height: 681 },
+    heroImage: { src: "/assets/peek-file-search.png", width: 1456, height: 1080 },
     screenshots: [
-      { id: "search", src: "/assets/peek-file-search.jpeg", width: 920, height: 681 },
+      { id: "search", src: "/assets/peek-file-search.png", width: 1456, height: 1080 },
       { id: "capture", src: "/assets/peek-capture-toolbar.png", width: 1600, height: 278, panorama: true },
       { id: "recognition", src: "/assets/peek-ocr.png", width: 2440, height: 1440 },
       { id: "settings", src: "/assets/peek-settings.jpeg", width: 980, height: 728 },
