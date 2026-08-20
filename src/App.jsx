@@ -72,10 +72,10 @@ const products = {
     icon: "/assets/tracehalo-icon.png",
     heroImage: { src: "/assets/tracehalo-live-monitor.png", width: 1558, height: 1010 },
     screenshots: [
-      { id: "monitor", src: "/assets/tracehalo-live-monitor.png", width: 1558, height: 1010 },
-      { id: "storage", src: "/assets/tracehalo-storage.png", width: 1558, height: 1010 },
-      { id: "devices", src: "/assets/tracehalo-input-devices.png", width: 1220, height: 790 },
-      { id: "menu", src: "/assets/tracehalo-menu-bar.png", width: 282, height: 787, portrait: true },
+      { id: "monitor", src: "/assets/tracehalo-live-monitor.png", width: 1558, height: 1010, focusX: "66%", focusY: "44%", focusScale: 1.16 },
+      { id: "storage", src: "/assets/tracehalo-storage.png", width: 1558, height: 1010, focusX: "50%", focusY: "46%", focusScale: 1.18 },
+      { id: "devices", src: "/assets/tracehalo-input-devices.png", width: 1220, height: 790, focusX: "52%", focusY: "42%", focusScale: 1.14 },
+      { id: "menu", src: "/assets/tracehalo-menu-bar.png", width: 282, height: 787, portrait: true, focusX: "50%", focusY: "50%", focusScale: 1.05 },
     ],
     statusImage: { src: "/assets/tracehalo-menu-bar.png", width: 282, height: 787, mode: "portrait" },
     principleIcons: [Monitor, ShieldCheck, Code],
@@ -246,10 +246,10 @@ const products = {
     icon: "/assets/peek-icon.png",
     heroImage: { src: "/assets/peek-file-search.png", width: 1456, height: 1080 },
     screenshots: [
-      { id: "search", src: "/assets/peek-file-search.png", width: 1456, height: 1080 },
-      { id: "capture", src: "/assets/peek-capture-toolbar.png", width: 1600, height: 278, panorama: true },
-      { id: "recognition", src: "/assets/peek-ocr.png", width: 2440, height: 1440 },
-      { id: "settings", src: "/assets/peek-settings.jpeg", width: 980, height: 728 },
+      { id: "search", src: "/assets/peek-file-search.png", width: 1456, height: 1080, focusX: "20%", focusY: "17%", focusScale: 1.22 },
+      { id: "capture", src: "/assets/peek-capture-toolbar.png", width: 1600, height: 278, panorama: true, focusX: "50%", focusY: "50%", focusScale: 1.04 },
+      { id: "recognition", src: "/assets/peek-ocr.png", width: 2440, height: 1440, focusX: "68%", focusY: "44%", focusScale: 1.16 },
+      { id: "settings", src: "/assets/peek-settings.jpeg", width: 980, height: 728, focusX: "28%", focusY: "34%", focusScale: 1.18 },
     ],
     statusImage: { src: "/assets/peek-icon.png", width: 512, height: 512, mode: "icon" },
     principleIcons: [MagnifyingGlass, Camera, ShieldCheck],
@@ -490,7 +490,7 @@ function ProductSwitcher({ activeProduct, language, labels, onChange }) {
     <aside className="product-switcher-shell" aria-label={labels.label}>
       <span className="product-switcher-title">{labels.title}</span>
       <nav className="product-switcher" aria-label={labels.label}>
-        {supportedProducts.map((productId) => {
+        {supportedProducts.map((productId, index) => {
           const product = products[productId];
           const isActive = activeProduct === productId;
           return (
@@ -506,12 +506,13 @@ function ProductSwitcher({ activeProduct, language, labels, onChange }) {
                 if (!isActive) onChange(productId);
               }}
             >
+              <span className="product-option-index" aria-hidden="true">0{index + 1}</span>
               <img src={product.icon} alt="" width="48" height="48" />
               <span>
                 <strong>{product.name}</strong>
                 <small>{labels[productId]}</small>
               </span>
-              <span className="product-option-indicator" aria-hidden="true" />
+              <ArrowRight className="product-option-arrow" aria-hidden="true" size={15} weight="bold" />
             </a>
           );
         })}
@@ -579,6 +580,35 @@ export function App() {
   }, [activeProduct]);
 
   useEffect(() => {
+    const hero = heroRef.current;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const compactLayout = window.matchMedia("(max-width: 860px)");
+    if (!hero || reducedMotion.matches || compactLayout.matches) return undefined;
+
+    const handlePointerMove = (event) => {
+      const rect = hero.getBoundingClientRect();
+      const x = clamp((event.clientX - rect.left) / rect.width);
+      const y = clamp((event.clientY - rect.top) / window.innerHeight);
+      hero.style.setProperty("--hero-tilt-x", `${(0.5 - y) * 3.2}deg`);
+      hero.style.setProperty("--hero-tilt-y", `${(x - 0.5) * 4.2}deg`);
+      hero.style.setProperty("--hero-light-x", `${x * 100}%`);
+      hero.style.setProperty("--hero-light-y", `${y * 100}%`);
+    };
+    const resetPointer = () => {
+      hero.style.setProperty("--hero-tilt-x", "0deg");
+      hero.style.setProperty("--hero-tilt-y", "0deg");
+      hero.style.setProperty("--hero-light-x", "50%");
+      hero.style.setProperty("--hero-light-y", "45%");
+    };
+    hero.addEventListener("pointermove", handlePointerMove, { passive: true });
+    hero.addEventListener("pointerleave", resetPointer);
+    return () => {
+      hero.removeEventListener("pointermove", handlePointerMove);
+      hero.removeEventListener("pointerleave", resetPointer);
+    };
+  }, [activeProduct]);
+
+  useEffect(() => {
     const revealItems = document.querySelectorAll("[data-reveal]");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -600,6 +630,10 @@ export function App() {
     const compactLayout = window.matchMedia("(max-width: 860px)");
     let animationFrame = 0;
     let previousStoryIndex = 0;
+    let previousScrollY = window.scrollY;
+    let previousScrollTime = performance.now();
+    let scrollVelocity = 0;
+    let settleTimer = 0;
 
     const resetMotionStyles = () => {
       const hero = heroRef.current;
@@ -611,15 +645,29 @@ export function App() {
           "--hero-product-scale",
           "--hero-product-y",
           "--hero-halo-scale",
+          "--hero-frame-radius",
+          "--hero-veil-opacity",
           "--hero-scroll-opacity",
+          "--hero-scroll-skew",
         ].forEach((property) => hero.style.removeProperty(property));
       }
-      storyStepRefs.current.forEach((step) => step?.style.removeProperty("--step-focus"));
+      storyStepRefs.current.forEach((step) => {
+        step?.style.removeProperty("--step-focus");
+        step?.style.removeProperty("--step-shift");
+        step?.style.removeProperty("--step-number-opacity");
+      });
       storyLayerRefs.current.forEach((layer, index) => {
         if (!layer) return;
         layer.style.setProperty("--layer-opacity", index === 0 ? "1" : "0");
         layer.style.setProperty("--layer-scale", "1");
         layer.style.setProperty("--layer-y", "0px");
+        layer.style.setProperty("--layer-rotate", "0deg");
+        layer.style.setProperty("--layer-blur", "0px");
+        layer.style.setProperty("--layer-clip", "0%");
+        layer.style.setProperty("--velocity-y", "0px");
+        layer.style.setProperty("--velocity-rotate", "0deg");
+        layer.style.setProperty("--image-scale", "1");
+        layer.style.setProperty("--image-shift-y", "0px");
       });
       previousStoryIndex = 0;
       setActiveStoryIndex(0);
@@ -637,16 +685,19 @@ export function App() {
         const heroRect = hero.getBoundingClientRect();
         const heroDistance = Math.max(hero.offsetHeight - viewportHeight, 1);
         const heroProgress = clamp(-heroRect.top / heroDistance);
-        const productReveal = smoothstep(0.04, 0.52, heroProgress);
-        const copyExit = smoothstep(0.16, 0.55, heroProgress);
-        const finalLift = smoothstep(0.68, 1, heroProgress);
+        const productReveal = smoothstep(0.02, 0.42, heroProgress);
+        const copyExit = smoothstep(0.14, 0.5, heroProgress);
+        const finalLift = smoothstep(0.22, 0.88, heroProgress);
         hero.style.setProperty("--hero-copy-opacity", String(1 - copyExit));
-        hero.style.setProperty("--hero-copy-y", `${-54 * copyExit}px`);
-        hero.style.setProperty("--hero-product-opacity", String(0.64 + productReveal * 0.36));
-        hero.style.setProperty("--hero-product-scale", String(0.8 + productReveal * 0.2));
-        hero.style.setProperty("--hero-product-y", `${112 * (1 - productReveal) - 44 * finalLift}px`);
-        hero.style.setProperty("--hero-halo-scale", String(1 + heroProgress * 0.12));
+        hero.style.setProperty("--hero-copy-y", `${-82 * copyExit}px`);
+        hero.style.setProperty("--hero-product-opacity", String(0.42 + productReveal * 0.58));
+        hero.style.setProperty("--hero-product-scale", String(0.72 + productReveal * 0.28 + finalLift * 0.08));
+        hero.style.setProperty("--hero-product-y", `${190 * (1 - productReveal) - 160 * finalLift}px`);
+        hero.style.setProperty("--hero-halo-scale", String(1 + heroProgress * 0.24));
+        hero.style.setProperty("--hero-frame-radius", `${30 - finalLift * 18}px`);
+        hero.style.setProperty("--hero-veil-opacity", String(0.34 + finalLift * 0.38));
         hero.style.setProperty("--hero-scroll-opacity", String(1 - smoothstep(0.03, 0.28, heroProgress)));
+        hero.style.setProperty("--hero-scroll-skew", `${scrollVelocity * -0.45}deg`);
       }
 
       const steps = storyStepRefs.current.filter(Boolean);
@@ -654,7 +705,7 @@ export function App() {
       const targetLine = viewportHeight * 0.52;
       let nextStoryIndex = 0;
       let nearestDistance = Number.POSITIVE_INFINITY;
-      const focusValues = steps.map((step, index) => {
+      const sceneValues = steps.map((step, index) => {
         const rect = step.getBoundingClientRect();
         const center = rect.top + rect.height / 2;
         const distance = Math.abs(center - targetLine);
@@ -664,16 +715,29 @@ export function App() {
         }
         const focus = 1 - clamp(distance / (viewportHeight * 0.72));
         step.style.setProperty("--step-focus", String(focus));
-        return focus;
+        step.style.setProperty("--step-shift", `${-28 * (1 - focus)}px`);
+        step.style.setProperty("--step-number-opacity", String(focus * 0.12));
+        return {
+          focus,
+          progress: clamp((targetLine - rect.top) / Math.max(rect.height, 1)),
+        };
       });
-      const focusTotal = focusValues.reduce((total, value) => total + value, 0) || 1;
       storyLayerRefs.current.forEach((layer, index) => {
         if (!layer) return;
-        const opacity = clamp((focusValues[index] / focusTotal) * 1.6);
+        const scene = sceneValues[index] ?? { focus: 0, progress: 0 };
+        const opacity = smoothstep(0.18, 0.78, scene.focus);
         const relativePosition = index - nextStoryIndex;
+        const focusScale = Number(layer.dataset.focusScale ?? 1);
         layer.style.setProperty("--layer-opacity", String(opacity));
-        layer.style.setProperty("--layer-scale", String(0.965 + opacity * 0.035));
-        layer.style.setProperty("--layer-y", `${relativePosition * 18}px`);
+        layer.style.setProperty("--layer-scale", String(0.88 + opacity * 0.12));
+        layer.style.setProperty("--layer-y", `${relativePosition * 86 * (1 - opacity)}px`);
+        layer.style.setProperty("--layer-rotate", `${relativePosition * 4.5 * (1 - opacity)}deg`);
+        layer.style.setProperty("--layer-blur", `${(1 - opacity) * 10}px`);
+        layer.style.setProperty("--layer-clip", `${(1 - opacity) * 16}%`);
+        layer.style.setProperty("--velocity-y", `${scrollVelocity * 18}px`);
+        layer.style.setProperty("--velocity-rotate", `${scrollVelocity * 0.65}deg`);
+        layer.style.setProperty("--image-scale", String(1 + scene.progress * (focusScale - 1)));
+        layer.style.setProperty("--image-shift-y", `${(0.5 - scene.progress) * 12}px`);
       });
       if (nextStoryIndex !== previousStoryIndex) {
         previousStoryIndex = nextStoryIndex;
@@ -684,14 +748,30 @@ export function App() {
     const requestUpdate = () => {
       if (!animationFrame) animationFrame = window.requestAnimationFrame(updateMotion);
     };
+    const handleScroll = () => {
+      const now = performance.now();
+      const elapsed = Math.max(now - previousScrollTime, 16);
+      const distance = window.scrollY - previousScrollY;
+      const instantaneousVelocity = clamp(distance / (elapsed * 1.25), -1, 1);
+      scrollVelocity = scrollVelocity * 0.42 + instantaneousVelocity * 0.58;
+      previousScrollY = window.scrollY;
+      previousScrollTime = now;
+      window.clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(() => {
+        scrollVelocity = 0;
+        requestUpdate();
+      }, 110);
+      requestUpdate();
+    };
     updateMotion();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", requestUpdate);
     reducedMotion.addEventListener?.("change", requestUpdate);
     compactLayout.addEventListener?.("change", requestUpdate);
     return () => {
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
-      window.removeEventListener("scroll", requestUpdate);
+      window.clearTimeout(settleTimer);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", requestUpdate);
       reducedMotion.removeEventListener?.("change", requestUpdate);
       compactLayout.removeEventListener?.("change", requestUpdate);
@@ -731,10 +811,25 @@ export function App() {
       />
 
       <main id="main-content" className="product-main" key={activeProduct}>
+        <div className="product-transition" aria-hidden="true">
+          <img src={product.icon} alt="" width="96" height="96" />
+          <span>{product.order}</span>
+          <strong>{product.name}</strong>
+        </div>
         <section className="hero-scroll" id="top" ref={heroRef} aria-labelledby="hero-title">
           <div className="hero-sticky">
-            <div className="hero-background" aria-hidden="true" />
+            <div className="hero-background" aria-hidden="true">
+              <span className="hero-aurora hero-aurora-one" />
+              <span className="hero-aurora hero-aurora-two" />
+              <span className="hero-grid" />
+              <span className="hero-vignette" />
+            </div>
             <div className="hero-copy">
+              <div className="hero-product-identity">
+                <img src={product.icon} alt="" width="46" height="46" />
+                <span><b>{product.order}</b> / 02</span>
+                <strong>{product.name}</strong>
+              </div>
               <p className="eyebrow">{t.hero.eyebrow}</p>
               <h1 id="hero-title">
                 {t.hero.prefix}<span>{t.hero.accent}</span>{t.hero.suffix}<br />{t.hero.secondLine}
@@ -750,14 +845,24 @@ export function App() {
               </div>
             </div>
             <figure className="hero-product">
-              <div className="product-frame product-frame-hero">
-                <img
-                  src={product.heroImage.src}
-                  alt={t.hero.imageAlt}
-                  width={product.heroImage.width}
-                  height={product.heroImage.height}
-                  fetchPriority="high"
-                />
+              <div className="hero-product-halo" aria-hidden="true" />
+              <div className="hero-device">
+                <span className="hero-device-camera" aria-hidden="true" />
+                <div className="product-frame product-frame-hero">
+                  <img
+                    src={product.heroImage.src}
+                    alt={t.hero.imageAlt}
+                    width={product.heroImage.width}
+                    height={product.heroImage.height}
+                    fetchPriority="high"
+                  />
+                </div>
+                <span className="hero-device-edge" aria-hidden="true" />
+              </div>
+              <div className="hero-feature-strip" aria-label={t.principles.label}>
+                {t.principles.items.map((item, index) => (
+                  <span key={item.title}><b>0{index + 1}</b>{item.title}</span>
+                ))}
               </div>
               <figcaption>{t.hero.caption}</figcaption>
             </figure>
@@ -768,6 +873,19 @@ export function App() {
         </section>
 
         <section className="project-story" id="work" aria-labelledby="project-title">
+          <div className="story-bridge" aria-hidden="true">
+            <img
+              src={product.heroImage.src}
+              alt=""
+              width={product.heroImage.width}
+              height={product.heroImage.height}
+            />
+            <span />
+          </div>
+          <div className="story-atmosphere" aria-hidden="true">
+            <span />
+            <span />
+          </div>
           <div className="story-intro section-container" data-reveal>
             <p className="section-index">{t.story.eyebrow}</p>
             <div>
@@ -789,11 +907,24 @@ export function App() {
                   <article
                     className={`story-step ${activeStoryIndex === index ? "is-active" : ""}`}
                     key={chapter.id}
+                    data-scene={chapter.id}
                     ref={(element) => { storyStepRefs.current[index] = element; }}
                   >
+                    <span className="story-step-number" aria-hidden="true">{chapter.number}</span>
                     <div className="story-step-copy">
                       <p className="story-step-index">{chapter.number} / {chapter.label}</p>
-                      <h3>{chapter.title}</h3>
+                      <h3 aria-label={chapter.title}>
+                        {(language === "zh" ? Array.from(chapter.title) : chapter.title.split(" ")).map((token, tokenIndex) => (
+                          <span
+                            className="story-title-token"
+                            aria-hidden="true"
+                            key={`${chapter.id}-${tokenIndex}`}
+                            style={{ "--token-delay": `${tokenIndex * 34}ms` }}
+                          >
+                            {token}{language === "en" ? "\u00a0" : ""}
+                          </span>
+                        ))}
+                      </h3>
                       <p>{chapter.copy}</p>
                     </div>
                     <figure className={`story-mobile-media ${mediaClass}`}>
@@ -813,11 +944,16 @@ export function App() {
               })}
             </div>
 
-            <div className="story-visual" aria-live="polite">
+            <div
+              className="story-visual"
+              aria-live="polite"
+              style={{ "--story-progress": `${((activeStoryIndex + 1) / screenshots.length) * 100}%` }}
+            >
               <div className="story-stage-meta">
-                <span>{t.story.progress}</span>
+                <span>{product.name} · {t.story.progress}</span>
                 <strong>{String(activeStoryIndex + 1).padStart(2, "0")} / {String(screenshots.length).padStart(2, "0")}</strong>
               </div>
+              <div className="story-progress-track" aria-hidden="true"><span /></div>
               <div className="story-stage">
                 {screenshots.map((screenshot, index) => {
                   const chapter = t.story.chapters[index];
@@ -827,14 +963,27 @@ export function App() {
                     <figure
                       className={`story-layer ${mediaClass}`}
                       key={screenshot.id}
+                      data-scene={screenshot.id}
+                      data-focus-scale={screenshot.focusScale}
                       ref={(element) => { storyLayerRefs.current[index] = element; }}
                       style={{
                         "--layer-opacity": index === 0 ? 1 : 0,
                         "--layer-scale": 1,
                         "--layer-y": "0px",
+                        "--layer-rotate": "0deg",
+                        "--layer-blur": "0px",
+                        "--layer-clip": "0%",
+                        "--velocity-y": "0px",
+                        "--velocity-rotate": "0deg",
+                        "--focus-x": screenshot.focusX,
+                        "--focus-y": screenshot.focusY,
+                        "--image-scale": 1,
+                        "--image-shift-y": "0px",
                       }}
                       aria-hidden={activeStoryIndex !== index}
                     >
+                      <span className="story-layer-number" aria-hidden="true">{chapter.number}</span>
+                      <span className="story-layer-orbit" aria-hidden="true" />
                       <div className="story-layer-visual">
                         <div className="product-frame">
                           <img
@@ -846,7 +995,10 @@ export function App() {
                           />
                         </div>
                       </div>
-                      <figcaption>{t.story.screenshot} · {chapter.label}</figcaption>
+                      <figcaption>
+                        <span>{t.story.screenshot}</span>
+                        <strong>{chapter.number} · {chapter.label}</strong>
+                      </figcaption>
                     </figure>
                   );
                 })}
@@ -881,6 +1033,8 @@ export function App() {
               </ExternalLink>
             </div>
             <figure className={`menubar-product is-${product.statusImage.mode}`} data-reveal>
+              <span className="status-orbit status-orbit-one" aria-hidden="true" />
+              <span className="status-orbit status-orbit-two" aria-hidden="true" />
               <img
                 src={product.statusImage.src}
                 alt={t.status.alt}
@@ -890,6 +1044,7 @@ export function App() {
               />
               <figcaption>{t.status.caption}</figcaption>
             </figure>
+            <span className="status-wordmark" aria-hidden="true">{product.name}</span>
           </div>
         </section>
 

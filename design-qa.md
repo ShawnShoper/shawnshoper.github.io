@@ -77,3 +77,23 @@ final result: passed
 - Desktop scroll choreography remains transform/opacity based. Compact and `prefers-reduced-motion` layouts render all chapters sequentially without depending on animation.
 - Production Vite build passed, Sites package preparation passed, `git diff --check` passed, and all four Sites worker tests passed.
 - A new browser screenshot comparison was not captured in this implementation pass; the historical screenshots above must not be treated as evidence for the Peek state.
+
+## 2026-08-21 cinematic launch redesign
+
+- Replaced the stacked navigation-panel feel with a smaller glass header and a compact, highly visible product capsule containing both product icons, numbering, names and direct-link semantics.
+- Rebuilt the first viewport as a full-screen launch stage: product identity, oversized editorial headline, layered aurora lighting, perspective grid, real screenshot inside a device-like presentation frame, feature strip and scroll-scrubbed scale/crop/depth variables.
+- Added restrained pointer parallax on capable desktop layouts; it is disabled on compact layouts and when reduced motion is requested.
+- Upgraded the four product chapters into full-viewport scenes with large scene numbering, continuous progress, depth/blur/clip transitions, screenshot-specific portrait and panorama stages, and product-colored atmospheric light. No fabricated product UI was added.
+- Reworked the principles, closing product statement and developer section into larger launch-page moments with glass surfaces, orbital details and oversized product typography.
+- Product switching still uses real anchors and preserves `p`, `lang` and section hashes. The bilingual content and metadata model is unchanged.
+- Mobile and reduced-motion layouts explicitly reset scroll transforms, show every screenshot sequentially and remove the product curtain, pointer tilt and orbit animation.
+- The first coherent Peek preview compiled and returned HTTP 200 before the remaining scenes were implemented. No screenshot/DOM browser audit was requested for this pass, so this section records implementation and build evidence rather than pixel-level visual approval.
+
+## 2026-08-21 continuous product-film pass
+
+- Connected the hero and product story with a faded continuation of the same real hero screenshot, so the page reads as one continuous launch sequence instead of separate cards.
+- Added screenshot-specific focal points and restrained camera pushes for all four TraceHalo and all four Peek scenes. The motion transforms the actual repository imagery; it does not recreate or fabricate product UI.
+- Added short-lived scroll-velocity tilt and depth, per-token chapter-title reveals and an icon-led circular product-switch transition. All of these effects are disabled or flattened for compact and reduced-motion layouts.
+- Mobile chapters now use a vertical filmstrip line and alternating screenshot staging while retaining a linear, fully readable document flow.
+- Production Vite build passed, Sites packaging produced `dist/server/index.js` and `dist/.openai/hosting.json`, all four Sites worker tests passed, and Peek, TraceHalo and English hash direct links each returned HTTP 200 from the local preview.
+- No screenshot/DOM browser audit was requested for this pass; visual acceptance remains available in the running local preview.
