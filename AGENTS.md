@@ -16,3 +16,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Use Apple-style, scroll-driven product storytelling: a pinned hero reveal followed by a restrained, pinned sequence of real TraceHalo screenshots. Prefer transform/opacity choreography over decorative particles or novelty 3D effects.
 - Provide complete Simplified Chinese and English presentation. Default first visits to Chinese and place the language selector in the upper-right navigation; translate navigation, content, captions, metadata, and accessibility labels together.
 - Preserve a complete, readable static layout for mobile and `prefers-reduced-motion` users instead of requiring scroll animation to understand the content.
+- Present TraceHalo and Peek as two first-class products. Use a prominent, sticky product switcher with both icons, names, and short positioning copy; do not reduce product selection to a subtle navigation control.
+- Keep product state shareable with the short `p` query parameter (`?p=tracehalo` and `?p=peek`) while preserving the existing `lang` query parameter and in-page anchors.

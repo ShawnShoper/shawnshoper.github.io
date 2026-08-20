@@ -1,4 +1,6 @@
-# Design QA — Apple-style bilingual portfolio refresh
+# Design QA — TraceHalo baseline (historical)
+
+> The evidence below records the original TraceHalo-only visual pass. It is retained as the Apple-style baseline and does not claim visual verification of the later dual-product Peek extension.
 
 ## Evidence
 
@@ -66,3 +68,12 @@ The selected mock contains an invented dashboard. The implementation correctly s
 - [P3] A future pass could provide an alternate mobile-specific visual mock, but the current responsive interpretation is complete and usable.
 
 final result: passed
+
+## 2026-08-21 dual-product implementation check
+
+- Added a persistent, high-visibility TraceHalo/Peek selector. Each option is a real anchor with a shareable `?p=tracehalo` or `?p=peek` URL and preserves the current language query and section hash.
+- Added complete Chinese and English product copy, metadata, accessibility labels, four-chapter scroll stories, principles and closing sections for both products.
+- Peek imagery is copied from the project itself: the official file-search and settings screenshots, the implemented compact capture toolbar, the implemented OCR result window and the official app icon. Declared image dimensions match the source files.
+- Desktop scroll choreography remains transform/opacity based. Compact and `prefers-reduced-motion` layouts render all chapters sequentially without depending on animation.
+- Production Vite build passed, Sites package preparation passed, `git diff --check` passed, and all four Sites worker tests passed.
+- A new browser screenshot comparison was not captured in this implementation pass; the historical screenshots above must not be treated as evidence for the Peek state.
