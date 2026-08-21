@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   Camera,
@@ -29,14 +28,15 @@ const shellCopy = {
       peek: "本地搜索、截图与识别",
     },
     about: {
-      eyebrow: "关于开发者",
+      eyebrow: "关于我",
       title: "你好，我是 ShawnShoper。",
-      copy: "我独立构建软件，重视工艺、清晰度和真实使用者的体验。TraceHalo 让 Mac 状态更易理解，Peek 让查找、截图与识别更顺手。",
+      copy: "我用 AI 编程把产品想法变成真实应用，重视工艺、清晰度和使用体验。TraceHalo 让 Mac 状态更易理解，Peek 让查找、截图与识别更顺手。",
       action: "在 GitHub 联系我",
       traceHaloIconAlt: "TraceHalo 应用图标",
       peekIconAlt: "Peek 应用图标",
     },
     footerLabel: "开源产品",
+    aiBuilt: "所有应用均由 AI 编程实现",
     externalProfile: "在新窗口打开 ShawnShoper 的 GitHub 主页",
   },
   en: {
@@ -51,14 +51,15 @@ const shellCopy = {
       peek: "Local search, capture & recognition",
     },
     about: {
-      eyebrow: "THE MAKER",
+      eyebrow: "ABOUT ME",
       title: "Hi, I’m ShawnShoper.",
-      copy: "I build independent software with care for craft, clarity and the people who use it. TraceHalo makes Mac status easier to understand; Peek makes search, capture and recognition feel immediate.",
+      copy: "I turn product ideas into real applications with AI-assisted programming, with care for craft, clarity and the people who use them. TraceHalo makes Mac status easier to understand; Peek makes search, capture and recognition feel immediate.",
       action: "Connect on GitHub",
       traceHaloIconAlt: "TraceHalo app icon",
       peekIconAlt: "Peek app icon",
     },
     footerLabel: "Open-source products",
+    aiBuilt: "All applications are built with AI programming",
     externalProfile: "Open ShawnShoper on GitHub in a new window",
   },
 };
@@ -83,14 +84,14 @@ const products = {
       zh: {
         meta: {
           title: "TraceHalo — ShawnShoper",
-          description: "TraceHalo 是一款自由、开源的 Mac 系统监控工具，由 ShawnShoper 独立开发。",
+          description: "TraceHalo 是一款自由、开源的 Mac 系统监控工具，由 AI 编程实现。",
         },
         hero: {
           eyebrow: "TRACEHALO — 原生 MAC 系统监控",
-          prefix: "构建更",
-          accent: "安静",
-          suffix: "、",
-          secondLine: "更清晰的软件。",
+          prefix: "了解 Mac，",
+          accent: "就这么清晰。",
+          suffix: "",
+          secondLine: "",
           intro: "让性能、存储、设备与传感器状态更容易理解，也更少打扰你。",
           primary: "探索 TraceHalo",
           secondary: "查看项目源码",
@@ -161,14 +162,14 @@ const products = {
       en: {
         meta: {
           title: "TraceHalo — ShawnShoper",
-          description: "TraceHalo is a free, open-source system monitor for Mac, independently built by ShawnShoper.",
+          description: "TraceHalo is a free, open-source system monitor for Mac, built with AI programming.",
         },
         hero: {
           eyebrow: "TRACEHALO — NATIVE MAC SYSTEM MONITOR",
-          prefix: "Building ",
-          accent: "quieter",
-          suffix: ",",
-          secondLine: "clearer software.",
+          prefix: "Know your Mac. ",
+          accent: "Clearly.",
+          suffix: "",
+          secondLine: "",
           intro: "Make performance, storage, devices and sensors easier to understand — with less interruption.",
           primary: "Discover TraceHalo",
           secondary: "Explore the repository",
@@ -261,10 +262,10 @@ const products = {
         },
         hero: {
           eyebrow: "PEEK — 本地搜索与截图工具",
-          prefix: "找到。",
-          accent: "看见。",
+          prefix: "找到它，",
+          accent: "就这么简单。",
           suffix: "",
-          secondLine: "就在此刻。",
+          secondLine: "",
           intro: "搜索应用与文件，完成截图、标注和识别。所有重要信息都留在你的 Mac。",
           primary: "探索 Peek",
           secondary: "查看项目源码",
@@ -340,9 +341,9 @@ const products = {
         hero: {
           eyebrow: "PEEK — LOCAL SEARCH & CAPTURE",
           prefix: "Find it. ",
-          accent: "See it.",
+          accent: "That simple.",
           suffix: "",
-          secondLine: "Right now.",
+          secondLine: "",
           intro: "Search apps and files, capture, annotate and recognize — with your data staying on your Mac.",
           primary: "Discover Peek",
           secondary: "Explore the repository",
@@ -414,15 +415,6 @@ const products = {
   },
 };
 
-function clamp(value, min = 0, max = 1) {
-  return Math.min(max, Math.max(min, value));
-}
-
-function smoothstep(start, end, value) {
-  const progress = clamp((value - start) / (end - start));
-  return progress * progress * (3 - 2 * progress);
-}
-
 function getLanguageFromUrl() {
   if (typeof window === "undefined") return null;
   const queryLanguage = new URLSearchParams(window.location.search).get("lang");
@@ -490,7 +482,7 @@ function ProductSwitcher({ activeProduct, language, labels, onChange }) {
     <aside className="product-switcher-shell" aria-label={labels.label}>
       <span className="product-switcher-title">{labels.title}</span>
       <nav className="product-switcher" aria-label={labels.label}>
-        {supportedProducts.map((productId, index) => {
+        {supportedProducts.map((productId) => {
           const product = products[productId];
           const isActive = activeProduct === productId;
           return (
@@ -506,13 +498,12 @@ function ProductSwitcher({ activeProduct, language, labels, onChange }) {
                 if (!isActive) onChange(productId);
               }}
             >
-              <span className="product-option-index" aria-hidden="true">0{index + 1}</span>
               <img src={product.icon} alt="" width="48" height="48" />
               <span>
                 <strong>{product.name}</strong>
                 <small>{labels[productId]}</small>
               </span>
-              <ArrowRight className="product-option-arrow" aria-hidden="true" size={15} weight="bold" />
+              <span className="product-option-dot" aria-hidden="true" />
             </a>
           );
         })}
@@ -524,10 +515,7 @@ function ProductSwitcher({ activeProduct, language, labels, onChange }) {
 export function App() {
   const [language, setLanguage] = useState(getInitialLanguage);
   const [activeProduct, setActiveProduct] = useState(getProductFromUrl);
-  const [activeStoryIndex, setActiveStoryIndex] = useState(0);
-  const heroRef = useRef(null);
-  const storyStepRefs = useRef([]);
-  const storyLayerRefs = useRef([]);
+  const heroShowcaseRef = useRef(null);
 
   const shell = shellCopy[language];
   const product = products[activeProduct];
@@ -537,7 +525,6 @@ export function App() {
   const chooseProduct = useCallback((nextProduct) => {
     if (!supportedProducts.includes(nextProduct)) return;
     setActiveProduct(nextProduct);
-    setActiveStoryIndex(0);
     const nextUrl = new URL(window.location.href);
     nextUrl.searchParams.set("p", nextProduct);
     window.history.pushState({ product: nextProduct }, "", `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
@@ -580,31 +567,42 @@ export function App() {
   }, [activeProduct]);
 
   useEffect(() => {
-    const hero = heroRef.current;
+    const showcase = heroShowcaseRef.current;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const compactLayout = window.matchMedia("(max-width: 860px)");
-    if (!hero || reducedMotion.matches || compactLayout.matches) return undefined;
+    const compactLayout = window.matchMedia("(max-width: 760px)");
+    if (!showcase || reducedMotion.matches || compactLayout.matches) return undefined;
 
+    let frame = 0;
+    const updateScroll = () => {
+      frame = 0;
+      const progress = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.9)));
+      showcase.style.setProperty("--showcase-lift", `${progress * -34}px`);
+      showcase.style.setProperty("--showcase-scale", String(1 + progress * 0.025));
+    };
+    const requestUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateScroll);
+    };
     const handlePointerMove = (event) => {
-      const rect = hero.getBoundingClientRect();
-      const x = clamp((event.clientX - rect.left) / rect.width);
-      const y = clamp((event.clientY - rect.top) / window.innerHeight);
-      hero.style.setProperty("--hero-tilt-x", `${(0.5 - y) * 3.2}deg`);
-      hero.style.setProperty("--hero-tilt-y", `${(x - 0.5) * 4.2}deg`);
-      hero.style.setProperty("--hero-light-x", `${x * 100}%`);
-      hero.style.setProperty("--hero-light-y", `${y * 100}%`);
+      const rect = showcase.getBoundingClientRect();
+      const x = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+      const y = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+      showcase.style.setProperty("--showcase-tilt-x", `${(0.5 - y) * 2.4}deg`);
+      showcase.style.setProperty("--showcase-tilt-y", `${(x - 0.5) * 3.2}deg`);
     };
     const resetPointer = () => {
-      hero.style.setProperty("--hero-tilt-x", "0deg");
-      hero.style.setProperty("--hero-tilt-y", "0deg");
-      hero.style.setProperty("--hero-light-x", "50%");
-      hero.style.setProperty("--hero-light-y", "45%");
+      showcase.style.setProperty("--showcase-tilt-x", "0deg");
+      showcase.style.setProperty("--showcase-tilt-y", "0deg");
     };
-    hero.addEventListener("pointermove", handlePointerMove, { passive: true });
-    hero.addEventListener("pointerleave", resetPointer);
+
+    updateScroll();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    showcase.addEventListener("pointermove", handlePointerMove, { passive: true });
+    showcase.addEventListener("pointerleave", resetPointer);
     return () => {
-      hero.removeEventListener("pointermove", handlePointerMove);
-      hero.removeEventListener("pointerleave", resetPointer);
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      showcase.removeEventListener("pointermove", handlePointerMove);
+      showcase.removeEventListener("pointerleave", resetPointer);
     };
   }, [activeProduct]);
 
@@ -623,159 +621,6 @@ export function App() {
     );
     revealItems.forEach((item) => observer.observe(item));
     return () => observer.disconnect();
-  }, [activeProduct]);
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const compactLayout = window.matchMedia("(max-width: 860px)");
-    let animationFrame = 0;
-    let previousStoryIndex = 0;
-    let previousScrollY = window.scrollY;
-    let previousScrollTime = performance.now();
-    let scrollVelocity = 0;
-    let settleTimer = 0;
-
-    const resetMotionStyles = () => {
-      const hero = heroRef.current;
-      if (hero) {
-        [
-          "--hero-copy-opacity",
-          "--hero-copy-y",
-          "--hero-product-opacity",
-          "--hero-product-scale",
-          "--hero-product-y",
-          "--hero-halo-scale",
-          "--hero-frame-radius",
-          "--hero-veil-opacity",
-          "--hero-scroll-opacity",
-          "--hero-scroll-skew",
-        ].forEach((property) => hero.style.removeProperty(property));
-      }
-      storyStepRefs.current.forEach((step) => {
-        step?.style.removeProperty("--step-focus");
-        step?.style.removeProperty("--step-shift");
-        step?.style.removeProperty("--step-number-opacity");
-      });
-      storyLayerRefs.current.forEach((layer, index) => {
-        if (!layer) return;
-        layer.style.setProperty("--layer-opacity", index === 0 ? "1" : "0");
-        layer.style.setProperty("--layer-scale", "1");
-        layer.style.setProperty("--layer-y", "0px");
-        layer.style.setProperty("--layer-rotate", "0deg");
-        layer.style.setProperty("--layer-blur", "0px");
-        layer.style.setProperty("--layer-clip", "0%");
-        layer.style.setProperty("--velocity-y", "0px");
-        layer.style.setProperty("--velocity-rotate", "0deg");
-        layer.style.setProperty("--image-scale", "1");
-        layer.style.setProperty("--image-shift-y", "0px");
-      });
-      previousStoryIndex = 0;
-      setActiveStoryIndex(0);
-    };
-
-    const updateMotion = () => {
-      animationFrame = 0;
-      if (reducedMotion.matches || compactLayout.matches) {
-        resetMotionStyles();
-        return;
-      }
-      const viewportHeight = window.innerHeight;
-      const hero = heroRef.current;
-      if (hero) {
-        const heroRect = hero.getBoundingClientRect();
-        const heroDistance = Math.max(hero.offsetHeight - viewportHeight, 1);
-        const heroProgress = clamp(-heroRect.top / heroDistance);
-        const productReveal = smoothstep(0.02, 0.42, heroProgress);
-        const copyExit = smoothstep(0.14, 0.5, heroProgress);
-        const finalLift = smoothstep(0.22, 0.88, heroProgress);
-        hero.style.setProperty("--hero-copy-opacity", String(1 - copyExit));
-        hero.style.setProperty("--hero-copy-y", `${-82 * copyExit}px`);
-        hero.style.setProperty("--hero-product-opacity", String(0.42 + productReveal * 0.58));
-        hero.style.setProperty("--hero-product-scale", String(0.72 + productReveal * 0.28 + finalLift * 0.08));
-        hero.style.setProperty("--hero-product-y", `${190 * (1 - productReveal) - 160 * finalLift}px`);
-        hero.style.setProperty("--hero-halo-scale", String(1 + heroProgress * 0.24));
-        hero.style.setProperty("--hero-frame-radius", `${30 - finalLift * 18}px`);
-        hero.style.setProperty("--hero-veil-opacity", String(0.34 + finalLift * 0.38));
-        hero.style.setProperty("--hero-scroll-opacity", String(1 - smoothstep(0.03, 0.28, heroProgress)));
-        hero.style.setProperty("--hero-scroll-skew", `${scrollVelocity * -0.45}deg`);
-      }
-
-      const steps = storyStepRefs.current.filter(Boolean);
-      if (!steps.length) return;
-      const targetLine = viewportHeight * 0.52;
-      let nextStoryIndex = 0;
-      let nearestDistance = Number.POSITIVE_INFINITY;
-      const sceneValues = steps.map((step, index) => {
-        const rect = step.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        const distance = Math.abs(center - targetLine);
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nextStoryIndex = index;
-        }
-        const focus = 1 - clamp(distance / (viewportHeight * 0.72));
-        step.style.setProperty("--step-focus", String(focus));
-        step.style.setProperty("--step-shift", `${-28 * (1 - focus)}px`);
-        step.style.setProperty("--step-number-opacity", String(focus * 0.12));
-        return {
-          focus,
-          progress: clamp((targetLine - rect.top) / Math.max(rect.height, 1)),
-        };
-      });
-      storyLayerRefs.current.forEach((layer, index) => {
-        if (!layer) return;
-        const scene = sceneValues[index] ?? { focus: 0, progress: 0 };
-        const opacity = smoothstep(0.18, 0.78, scene.focus);
-        const relativePosition = index - nextStoryIndex;
-        const focusScale = Number(layer.dataset.focusScale ?? 1);
-        layer.style.setProperty("--layer-opacity", String(opacity));
-        layer.style.setProperty("--layer-scale", String(0.88 + opacity * 0.12));
-        layer.style.setProperty("--layer-y", `${relativePosition * 86 * (1 - opacity)}px`);
-        layer.style.setProperty("--layer-rotate", `${relativePosition * 4.5 * (1 - opacity)}deg`);
-        layer.style.setProperty("--layer-blur", `${(1 - opacity) * 10}px`);
-        layer.style.setProperty("--layer-clip", `${(1 - opacity) * 16}%`);
-        layer.style.setProperty("--velocity-y", `${scrollVelocity * 18}px`);
-        layer.style.setProperty("--velocity-rotate", `${scrollVelocity * 0.65}deg`);
-        layer.style.setProperty("--image-scale", String(1 + scene.progress * (focusScale - 1)));
-        layer.style.setProperty("--image-shift-y", `${(0.5 - scene.progress) * 12}px`);
-      });
-      if (nextStoryIndex !== previousStoryIndex) {
-        previousStoryIndex = nextStoryIndex;
-        setActiveStoryIndex(nextStoryIndex);
-      }
-    };
-
-    const requestUpdate = () => {
-      if (!animationFrame) animationFrame = window.requestAnimationFrame(updateMotion);
-    };
-    const handleScroll = () => {
-      const now = performance.now();
-      const elapsed = Math.max(now - previousScrollTime, 16);
-      const distance = window.scrollY - previousScrollY;
-      const instantaneousVelocity = clamp(distance / (elapsed * 1.25), -1, 1);
-      scrollVelocity = scrollVelocity * 0.42 + instantaneousVelocity * 0.58;
-      previousScrollY = window.scrollY;
-      previousScrollTime = now;
-      window.clearTimeout(settleTimer);
-      settleTimer = window.setTimeout(() => {
-        scrollVelocity = 0;
-        requestUpdate();
-      }, 110);
-      requestUpdate();
-    };
-    updateMotion();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    reducedMotion.addEventListener?.("change", requestUpdate);
-    compactLayout.addEventListener?.("change", requestUpdate);
-    return () => {
-      if (animationFrame) window.cancelAnimationFrame(animationFrame);
-      window.clearTimeout(settleTimer);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", requestUpdate);
-      reducedMotion.removeEventListener?.("change", requestUpdate);
-      compactLayout.removeEventListener?.("change", requestUpdate);
-    };
   }, [activeProduct]);
 
   const repoLabel =
@@ -803,208 +648,44 @@ export function App() {
         </div>
       </header>
 
-      <ProductSwitcher
-        activeProduct={activeProduct}
-        language={language}
-        labels={shell.products}
-        onChange={chooseProduct}
-      />
-
       <main id="main-content" className="product-main" key={activeProduct}>
-        <div className="product-transition" aria-hidden="true">
-          <img src={product.icon} alt="" width="96" height="96" />
-          <span>{product.order}</span>
-          <strong>{product.name}</strong>
-        </div>
-        <section className="hero-scroll" id="top" ref={heroRef} aria-labelledby="hero-title">
-          <div className="hero-sticky">
-            <div className="hero-background" aria-hidden="true">
-              <span className="hero-aurora hero-aurora-one" />
-              <span className="hero-aurora hero-aurora-two" />
-              <span className="hero-grid" />
-              <span className="hero-vignette" />
-            </div>
-            <div className="hero-copy">
-              <div className="hero-product-identity">
-                <img src={product.icon} alt="" width="46" height="46" />
-                <span><b>{product.order}</b> / 02</span>
-                <strong>{product.name}</strong>
-              </div>
-              <p className="eyebrow">{t.hero.eyebrow}</p>
-              <h1 id="hero-title">
-                {t.hero.prefix}<span>{t.hero.accent}</span>{t.hero.suffix}<br />{t.hero.secondLine}
-              </h1>
-              <p className="hero-intro">{t.hero.intro}</p>
-              <div className="hero-actions">
-                <a className="button button-primary" href="#work">
-                  {t.hero.primary} <ArrowRight aria-hidden="true" weight="bold" />
-                </a>
-                <ExternalLink href={product.repo} className="button button-secondary" label={repoLabel}>
-                  {t.hero.secondary} <GithubLogo aria-hidden="true" weight="fill" />
-                </ExternalLink>
-              </div>
-            </div>
-            <figure className="hero-product">
-              <div className="hero-product-halo" aria-hidden="true" />
-              <div className="hero-device">
-                <span className="hero-device-camera" aria-hidden="true" />
-                <div className="product-frame product-frame-hero">
-                  <img
-                    src={product.heroImage.src}
-                    alt={t.hero.imageAlt}
-                    width={product.heroImage.width}
-                    height={product.heroImage.height}
-                    fetchPriority="high"
-                  />
-                </div>
-                <span className="hero-device-edge" aria-hidden="true" />
-              </div>
-              <div className="hero-feature-strip" aria-label={t.principles.label}>
-                {t.principles.items.map((item, index) => (
-                  <span key={item.title}><b>0{index + 1}</b>{item.title}</span>
-                ))}
-              </div>
-              <figcaption>{t.hero.caption}</figcaption>
-            </figure>
-            <p className="scroll-cue" aria-hidden="true">
-              {t.hero.scroll}<ArrowDown weight="bold" />
-            </p>
-          </div>
-        </section>
-
-        <section className="project-story" id="work" aria-labelledby="project-title">
-          <div className="story-bridge" aria-hidden="true">
-            <img
-              src={product.heroImage.src}
-              alt=""
-              width={product.heroImage.width}
-              height={product.heroImage.height}
-            />
-            <span />
-          </div>
-          <div className="story-atmosphere" aria-hidden="true">
-            <span />
-            <span />
-          </div>
-          <div className="story-intro section-container" data-reveal>
-            <p className="section-index">{t.story.eyebrow}</p>
-            <div>
-              <h2 id="project-title">{t.story.title}</h2>
-              <p>{t.story.summary}</p>
-              <ExternalLink href={product.repo} className="text-link" label={repoLabel}>
-                {t.story.repo} <ArrowUpRight aria-hidden="true" weight="bold" />
+        <section className="hero" id="top" aria-labelledby="hero-title">
+          <div className="hero-glow" aria-hidden="true" />
+          <ProductSwitcher
+            activeProduct={activeProduct}
+            language={language}
+            labels={shell.products}
+            onChange={chooseProduct}
+          />
+          <div className="hero-copy" data-reveal>
+            <p className="eyebrow">{t.hero.eyebrow}</p>
+            <h1 id="hero-title">
+              {t.hero.prefix}<span>{t.hero.accent}</span>{t.hero.suffix}
+              {t.hero.secondLine && <><br />{t.hero.secondLine}</>}
+            </h1>
+            <p className="hero-intro">{t.hero.intro}</p>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#work">
+                {t.hero.primary} <ArrowRight aria-hidden="true" weight="bold" />
+              </a>
+              <ExternalLink href={product.repo} className="button button-secondary" label={repoLabel}>
+                {t.hero.secondary} <GithubLogo aria-hidden="true" weight="fill" />
               </ExternalLink>
             </div>
           </div>
-
-          <div className="story-shell section-container">
-            <div className="story-copy-rail">
-              {t.story.chapters.map((chapter, index) => {
-                const screenshot = screenshots[index];
-                const mediaClass = [screenshot.portrait && "is-portrait", screenshot.panorama && "is-panorama"]
-                  .filter(Boolean).join(" ");
-                return (
-                  <article
-                    className={`story-step ${activeStoryIndex === index ? "is-active" : ""}`}
-                    key={chapter.id}
-                    data-scene={chapter.id}
-                    ref={(element) => { storyStepRefs.current[index] = element; }}
-                  >
-                    <span className="story-step-number" aria-hidden="true">{chapter.number}</span>
-                    <div className="story-step-copy">
-                      <p className="story-step-index">{chapter.number} / {chapter.label}</p>
-                      <h3 aria-label={chapter.title}>
-                        {(language === "zh" ? Array.from(chapter.title) : chapter.title.split(" ")).map((token, tokenIndex) => (
-                          <span
-                            className="story-title-token"
-                            aria-hidden="true"
-                            key={`${chapter.id}-${tokenIndex}`}
-                            style={{ "--token-delay": `${tokenIndex * 34}ms` }}
-                          >
-                            {token}{language === "en" ? "\u00a0" : ""}
-                          </span>
-                        ))}
-                      </h3>
-                      <p>{chapter.copy}</p>
-                    </div>
-                    <figure className={`story-mobile-media ${mediaClass}`}>
-                      <div className="product-frame">
-                        <img
-                          src={screenshot.src}
-                          alt={chapter.alt}
-                          width={screenshot.width}
-                          height={screenshot.height}
-                          loading="lazy"
-                        />
-                      </div>
-                      <figcaption>{t.story.screenshot} · {chapter.label}</figcaption>
-                    </figure>
-                  </article>
-                );
-              })}
+          <figure className="hero-showcase" ref={heroShowcaseRef} data-reveal>
+            <div className="hero-showcase-orbit" aria-hidden="true" />
+            <div className="product-frame product-frame-hero">
+              <img
+                src={product.heroImage.src}
+                alt={t.hero.imageAlt}
+                width={product.heroImage.width}
+                height={product.heroImage.height}
+                fetchPriority="high"
+              />
             </div>
-
-            <div
-              className="story-visual"
-              aria-live="polite"
-              style={{ "--story-progress": `${((activeStoryIndex + 1) / screenshots.length) * 100}%` }}
-            >
-              <div className="story-stage-meta">
-                <span>{product.name} · {t.story.progress}</span>
-                <strong>{String(activeStoryIndex + 1).padStart(2, "0")} / {String(screenshots.length).padStart(2, "0")}</strong>
-              </div>
-              <div className="story-progress-track" aria-hidden="true"><span /></div>
-              <div className="story-stage">
-                {screenshots.map((screenshot, index) => {
-                  const chapter = t.story.chapters[index];
-                  const mediaClass = [screenshot.portrait && "is-portrait", screenshot.panorama && "is-panorama"]
-                    .filter(Boolean).join(" ");
-                  return (
-                    <figure
-                      className={`story-layer ${mediaClass}`}
-                      key={screenshot.id}
-                      data-scene={screenshot.id}
-                      data-focus-scale={screenshot.focusScale}
-                      ref={(element) => { storyLayerRefs.current[index] = element; }}
-                      style={{
-                        "--layer-opacity": index === 0 ? 1 : 0,
-                        "--layer-scale": 1,
-                        "--layer-y": "0px",
-                        "--layer-rotate": "0deg",
-                        "--layer-blur": "0px",
-                        "--layer-clip": "0%",
-                        "--velocity-y": "0px",
-                        "--velocity-rotate": "0deg",
-                        "--focus-x": screenshot.focusX,
-                        "--focus-y": screenshot.focusY,
-                        "--image-scale": 1,
-                        "--image-shift-y": "0px",
-                      }}
-                      aria-hidden={activeStoryIndex !== index}
-                    >
-                      <span className="story-layer-number" aria-hidden="true">{chapter.number}</span>
-                      <span className="story-layer-orbit" aria-hidden="true" />
-                      <div className="story-layer-visual">
-                        <div className="product-frame">
-                          <img
-                            src={screenshot.src}
-                            alt={activeStoryIndex === index ? chapter.alt : ""}
-                            width={screenshot.width}
-                            height={screenshot.height}
-                            loading={index === 0 ? "eager" : "lazy"}
-                          />
-                        </div>
-                      </div>
-                      <figcaption>
-                        <span>{t.story.screenshot}</span>
-                        <strong>{chapter.number} · {chapter.label}</strong>
-                      </figcaption>
-                    </figure>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+            <figcaption>{t.hero.caption}</figcaption>
+          </figure>
         </section>
 
         <section className="principles-section" aria-label={t.principles.label}>
@@ -1021,10 +702,53 @@ export function App() {
           </div>
         </section>
 
-        <section className="menubar-story" aria-labelledby="status-title">
-          <div className="menubar-background" aria-hidden="true" />
-          <div className="menubar-inner section-container">
-            <div className="menubar-copy" data-reveal>
+        <section className="project-story" id="work" aria-labelledby="project-title">
+          <div className="story-intro section-container" data-reveal>
+            <p className="section-index">{t.story.eyebrow}</p>
+            <div>
+              <h2 id="project-title">{t.story.title}</h2>
+              <p>{t.story.summary}</p>
+              <ExternalLink href={product.repo} className="text-link" label={repoLabel}>
+                {t.story.repo} <ArrowUpRight aria-hidden="true" weight="bold" />
+              </ExternalLink>
+            </div>
+          </div>
+
+          <div className="feature-list section-container">
+            {t.story.chapters.map((chapter, index) => {
+              const screenshot = screenshots[index];
+              const mediaClass = [screenshot.portrait && "is-portrait", screenshot.panorama && "is-panorama"]
+                .filter(Boolean).join(" ");
+              return (
+                <article className={`feature-row ${index % 2 ? "is-reversed" : ""}`} id={`feature-${chapter.id}`} key={chapter.id} data-reveal>
+                  <div className="feature-copy">
+                    <span className="feature-number">{chapter.number}</span>
+                    <p className="feature-label">{chapter.label}</p>
+                    <h3>{chapter.title}</h3>
+                    <p>{chapter.copy}</p>
+                  </div>
+                  <figure className={`feature-media ${mediaClass}`}>
+                    <span className="feature-halo" aria-hidden="true" />
+                    <div className="product-frame">
+                      <img
+                        src={screenshot.src}
+                        alt={chapter.alt}
+                        width={screenshot.width}
+                        height={screenshot.height}
+                        loading="lazy"
+                      />
+                    </div>
+                    <figcaption>{t.story.screenshot} · {chapter.label}</figcaption>
+                  </figure>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="status-story" aria-labelledby="status-title">
+          <div className="status-inner section-container">
+            <div className="status-copy" data-reveal>
               <p className="section-index">{t.status.eyebrow}</p>
               <h2 id="status-title">{t.status.title}</h2>
               <p>{t.status.copy}</p>
@@ -1032,7 +756,7 @@ export function App() {
                 {t.status.action} <ArrowUpRight aria-hidden="true" weight="bold" />
               </ExternalLink>
             </div>
-            <figure className={`menubar-product is-${product.statusImage.mode}`} data-reveal>
+            <figure className={`status-product is-${product.statusImage.mode}`} data-reveal>
               <span className="status-orbit status-orbit-one" aria-hidden="true" />
               <span className="status-orbit status-orbit-two" aria-hidden="true" />
               <img
@@ -1044,7 +768,6 @@ export function App() {
               />
               <figcaption>{t.status.caption}</figcaption>
             </figure>
-            <span className="status-wordmark" aria-hidden="true">{product.name}</span>
           </div>
         </section>
 
@@ -1067,7 +790,7 @@ export function App() {
       </main>
 
       <footer className="site-footer">
-        <span>© {new Date().getFullYear()} ShawnShoper · {shell.footerLabel}</span>
+        <span>© {new Date().getFullYear()} ShawnShoper · {shell.aiBuilt}</span>
         <span className="footer-products">
           {supportedProducts.map((productId) => (
             <ExternalLink

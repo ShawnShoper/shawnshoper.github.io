@@ -10,14 +10,14 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 ## Current prototype decisions
 
-- Recreate the selected "Aurora Product Journal" direction (the third displayed Product Design mock).
+- Recreate the selected first Product Design mock: an airy, light Apple-style product story with generous white space, pale blue gradients, a centered headline, a clear primary action, and softly elevated real product screenshots.
 - Product imagery must use real screenshots and the official icon from the TraceHalo repository. Do not replace product UI with generated mockups.
 - Keep the deliverable a static, responsive marketing page with working project/GitHub interactions.
-- Use Apple-style, scroll-driven product storytelling: a pinned hero reveal followed by a restrained, pinned sequence of real TraceHalo screenshots. Prefer transform/opacity choreography over decorative particles or novelty 3D effects.
+- Use Apple-style product storytelling that is complete and approachable for non-technical visitors. Keep animation subtle and supportive: gentle reveal, parallax, hover lift, and ambient gradient motion rather than complex pinned scenes or novelty effects.
 - Provide complete Simplified Chinese and English presentation. Default first visits to Chinese and place the language selector in the upper-right navigation; translate navigation, content, captions, metadata, and accessibility labels together.
 - Preserve a complete, readable static layout for mobile and `prefers-reduced-motion` users instead of requiring scroll animation to understand the content.
 - Present TraceHalo and Peek as two first-class products. Use a prominent, sticky product switcher with both icons, names, and short positioning copy; do not reduce product selection to a subtle navigation control.
 - Keep product state shareable with the short `p` query parameter (`?p=tracehalo` and `?p=peek`) while preserving the existing `lang` query parameter and in-page anchors.
 - Keep Peek marketing imagery synchronized with the files currently referenced by the Peek `master` README. When an official screenshot changes format or dimensions, replace the stale local asset and update its declared dimensions instead of keeping parallel old/new copies.
-- Make the portfolio feel like a cinematic Apple product launch rather than a card-based gallery: use full-viewport staging, scroll-scrubbed scale/crop/depth transitions, distinct product lighting, and restrained glass details. Keep the product selector obvious but compact, and derive the spectacle from real product screenshots instead of particles or invented UI.
-- Favor a continuous one-take handoff from hero to product chapters, with focal camera moves inside real screenshots, velocity-aware easing, and a vertical filmstrip rhythm on mobile instead of disconnected card scenes.
+- Keep the visual tone fresh, calm, and premium rather than dark or aggressively technical. Derive the polish from typography, spacing, real screenshots, soft gradients, and restrained glass details; never invent product UI or use a fabricated avatar.
+- State in the footer that every application was implemented with AI programming. Do not describe ShawnShoper as an independent developer.
