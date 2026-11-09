@@ -71,20 +71,26 @@ const products = {
     order: "01",
     repo: "https://github.com/ShawnShoper/TraceHalo",
     icon: "/assets/tracehalo-icon.png",
-    heroImage: { src: "/assets/tracehalo-live-monitor.png", width: 1558, height: 1010 },
+    release: {
+      version: "v0.2.1 Beta",
+      date: "2026-11-09",
+      notes: "https://github.com/ShawnShoper/TraceHalo/releases/tag/v0.2.1",
+      download: "https://github.com/ShawnShoper/TraceHalo/releases/download/v0.2.1/TraceHalo-0.2.1-arm64-x86_64.dmg",
+    },
+    heroImage: { src: "/assets/tracehalo-overview.png", localizedSrc: { zh: "/assets/tracehalo-overview-zh.png" }, width: 1320, height: 840 },
     screenshots: [
-      { id: "monitor", src: "/assets/tracehalo-live-monitor.png", width: 1558, height: 1010, focusX: "66%", focusY: "44%", focusScale: 1.16 },
-      { id: "storage", src: "/assets/tracehalo-storage.png", width: 1558, height: 1010, focusX: "50%", focusY: "46%", focusScale: 1.18 },
+      { id: "monitor", src: "/assets/tracehalo-overview.png", localizedSrc: { zh: "/assets/tracehalo-overview-zh.png" }, width: 1320, height: 840 },
+      { id: "storage", src: "/assets/tracehalo-storage.png", localizedSrc: { zh: "/assets/tracehalo-storage-zh.png" }, width: 1558, height: 1010 },
       { id: "devices", src: "/assets/tracehalo-input-devices.png", width: 1220, height: 790, focusX: "52%", focusY: "42%", focusScale: 1.14 },
-      { id: "menu", src: "/assets/tracehalo-menu-bar.png", width: 282, height: 787, portrait: true, focusX: "50%", focusY: "50%", focusScale: 1.05 },
+      { id: "menu", src: "/assets/tracehalo-live-monitor.png", localizedSrc: { zh: "/assets/tracehalo-live-monitor-zh.png" }, width: 1558, height: 1010 },
     ],
-    statusImage: { src: "/assets/tracehalo-menu-bar.png", width: 282, height: 787, mode: "portrait" },
+    statusImage: { src: "/assets/tracehalo-menu-bar.png", localizedSrc: { zh: "/assets/tracehalo-menu-bar-zh.png" }, width: 282, height: 787, mode: "portrait" },
     principleIcons: [Monitor, ShieldCheck, Code],
     copy: {
       zh: {
         meta: {
           title: "TraceHalo — ShawnShoper",
-          description: "TraceHalo 是一款自由、开源的 Mac 系统监控工具，由 AI 编程实现。",
+          description: "TraceHalo 是由 AI 编程实现的免费开源 Mac 系统监控工具。统一查看实时状态、资源趋势与应用信息，支持 macOS 14+、Apple 芯片和 Intel。",
         },
         hero: {
           eyebrow: "TRACEHALO — 原生 MAC 系统监控",
@@ -92,17 +98,34 @@ const products = {
           accent: "就这么清晰。",
           suffix: "",
           secondLine: "",
-          intro: "让性能、存储、设备与传感器状态更容易理解，也更少打扰你。",
-          primary: "探索 TraceHalo",
+          intro: "实时状态、资源趋势与应用管理，在一个原生工作空间里看清。",
+          primary: "下载 v0.2.1 Beta",
           secondary: "查看项目源码",
-          caption: "TraceHalo 真实界面 · 实时监控",
-          imageAlt: "TraceHalo 实时监控页面，展示菜单栏模块和即时系统数据",
+          caption: "TraceHalo 真实界面 · 新版实时监控首页",
+          imageAlt: "TraceHalo 中文实时监控首页，集中展示 CPU、内存、GPU、存储、网络、散热与资源历史",
           scroll: "向下滚动，进入产品",
+        },
+        release: {
+          eyebrow: "现已发布",
+          preview: "看看这次的新变化",
+          title: "应用管理，每一步都更清楚。",
+          summary: "从查看应用信息，到选择保留的数据，再到最后确认，v0.2.1 让每一步都清楚可见。",
+          date: "2026 年 11 月 9 日发布",
+          requirements: "macOS 14+ · Apple 芯片与 Intel",
+          notes: "查看完整更新",
+          download: "下载 Mac 版",
+          notesLabel: "在新窗口查看 TraceHalo v0.2.1 Beta 官方发布说明",
+          downloadLabel: "下载 TraceHalo v0.2.1 Beta Mac 通用 DMG 安装包",
+          items: [
+            { title: "应用信息，一行读完。", copy: "图标、名称、版本和磁盘占用整齐对齐。每个应用都有明确的卸载入口，选项在独立页面打开。" },
+            { title: "保留什么，由你选择。", copy: "卸载默认保留本机数据。选择清理时，可查看归属与影响；最终确认会完整列出待移除路径和保留清单。" },
+            { title: "权限准备，按需完成。", copy: "首次引导可以跳过，之后可在设置中继续。主窗口的冷启动、关闭后重开和菜单栏返回也得到改善。" },
+          ],
         },
         story: {
           eyebrow: "01 / TRACEHALO",
           title: "一款自由、开源的 Mac 系统监控工具。",
-          summary: "TraceHalo 把散落在多个 macOS 界面中的系统信息汇集到一个安静、原生的工作空间。滚动浏览它如何呈现性能、存储、设备和传感器。",
+          summary: "CPU、内存、GPU、存储、网络与散热集中在同一首页。点开卡片查看详情，用最近 15、30 或 60 分钟的资源趋势理解变化，再把关心的指标留在菜单栏。",
           repo: "查看 TraceHalo 源码",
           progress: "产品章节",
           screenshot: "真实项目截图",
@@ -112,8 +135,8 @@ const products = {
               number: "01",
               label: "实时监控",
               title: "系统状态，一眼看清。",
-              copy: "CPU、内存、温度、网络与进程保持实时更新。重要信息集中呈现，不让数据淹没判断。",
-              alt: "TraceHalo 实时监控配置页面，包含模块设置和系统状态预览",
+              copy: "实时读数、资源趋势与事件记录放在一起。点开资源卡片，即可原地查看核心、进程、磁盘、网络接口或传感器详情。",
+              alt: "TraceHalo 新版实时监控首页，展示六类资源卡片、历史趋势与事件记录",
             },
             {
               id: "storage",
@@ -128,23 +151,23 @@ const products = {
               number: "03",
               label: "输入设备",
               title: "连接的设备，清楚可见。",
-              copy: "键盘、鼠标和触控板的电量、连接方式与硬件信息集中展示，外设状态不再藏在系统深处。",
+              copy: "键盘、鼠标和触控板的连接方式与硬件信息集中展示。设备向 macOS 提供电量或充电信息时，也会一并显示。",
               alt: "TraceHalo 输入设备页面，展示键盘、鼠标和触控板信息",
             },
             {
               id: "menu",
               number: "04",
-              label: "菜单栏",
-              title: "需要时出现，其余时间保持安静。",
-              copy: "把真正关心的指标留在菜单栏。轻点即可展开详情，关闭后重新回到不打扰的状态。",
-              alt: "TraceHalo 菜单栏监控器，展示 CPU、内存、GPU、存储、网络和温度",
+              label: "菜单栏布局",
+              title: "只留下，你关心的指标。",
+              copy: "从实时监控顶部打开「菜单栏布局」，自由选择模块并即时预览。关闭主窗口后，菜单栏监控仍会继续。",
+              alt: "TraceHalo 菜单栏布局页面，展示可选监控模块与即时布局预览",
             },
           ],
         },
         principles: {
           label: "TraceHalo 的产品原则",
           items: [
-            { title: "原生", copy: "为 macOS 14 及 Apple 芯片打造，保持熟悉、快速且克制的使用体验。" },
+            { title: "原生", copy: "支持 macOS 14 及以上、Apple 芯片与 Intel Mac，保持熟悉、快速且克制的使用体验。" },
             { title: "私密", copy: "所有监控都在你的 Mac 上完成，不依赖账号、云端或分析服务。" },
             { title: "开源", copy: "采用 Apache 2.0 许可证，代码透明，欢迎学习、贡献和共同完善。" },
           ],
@@ -162,7 +185,7 @@ const products = {
       en: {
         meta: {
           title: "TraceHalo — ShawnShoper",
-          description: "TraceHalo is a free, open-source system monitor for Mac, built with AI programming.",
+          description: "TraceHalo is a free, open-source Mac system monitor built with AI programming. See live status, resource trends and app details on macOS 14+, Apple silicon and Intel.",
         },
         hero: {
           eyebrow: "TRACEHALO — NATIVE MAC SYSTEM MONITOR",
@@ -170,17 +193,34 @@ const products = {
           accent: "Clearly.",
           suffix: "",
           secondLine: "",
-          intro: "Make performance, storage, devices and sensors easier to understand — with less interruption.",
-          primary: "Discover TraceHalo",
+          intro: "Live status, resource trends and app management. Clear in one native workspace.",
+          primary: "Download v0.2.1 Beta",
           secondary: "Explore the repository",
-          caption: "Actual TraceHalo interface · Live Monitor",
-          imageAlt: "TraceHalo Live Monitor screen showing menu bar modules and live system data",
+          caption: "Actual TraceHalo interface · New Live Monitor home",
+          imageAlt: "TraceHalo Live Monitor home in English with CPU, memory, GPU, storage, network, cooling and resource history",
           scroll: "Scroll to enter the product",
+        },
+        release: {
+          eyebrow: "NOW AVAILABLE",
+          preview: "See what’s new",
+          title: "App management, made clear.",
+          summary: "From reviewing app details to choosing what stays and confirming what goes, v0.2.1 makes every step easier to follow.",
+          date: "Released November 9, 2026",
+          requirements: "macOS 14+ · Apple silicon & Intel",
+          notes: "Read the release notes",
+          download: "Download for Mac",
+          notesLabel: "Read the official TraceHalo v0.2.1 Beta release notes in a new window",
+          downloadLabel: "Download the TraceHalo v0.2.1 Beta universal Mac DMG installer",
+          items: [
+            { title: "App details, in one row.", copy: "Icons, names, versions and disk usage line up clearly. Every app has a visible uninstall action, with options in a separate view." },
+            { title: "Choose what stays.", copy: "Local data stays by default. Review ownership and impact before selecting files; the final confirmation lists every removal target and what you’re keeping." },
+            { title: "Set up access when needed.", copy: "Skip the first-run guide and return in Settings whenever you need it. Cold starts, reopening the window and returning from the menu bar are improved too." },
+          ],
         },
         story: {
           eyebrow: "01 / TRACEHALO",
           title: "A free, open-source system monitor for Mac.",
-          summary: "TraceHalo brings information normally spread across macOS into one calm, native workspace. Scroll through the ways it makes performance, storage, devices and sensors easier to understand.",
+          summary: "CPU, memory, GPU, storage, network and cooling share one home page. Expand a card for details, understand changes with 15, 30 or 60 minutes of resource history, and keep your key metrics in the menu bar.",
           repo: "Explore TraceHalo",
           progress: "Product chapter",
           screenshot: "Actual project screenshot",
@@ -190,8 +230,8 @@ const products = {
               number: "01",
               label: "Live Monitor",
               title: "The whole system, at a glance.",
-              copy: "CPU, memory, temperature, network and processes stay current. The signal remains clear without turning data into noise.",
-              alt: "TraceHalo Live Monitor configuration with modules and a system status preview",
+              copy: "Live readings, resource trends and events share one view. Expand a resource card in place for cores, processes, disks, network interfaces or sensors.",
+              alt: "TraceHalo Live Monitor home showing six resource cards, history charts and events",
             },
             {
               id: "storage",
@@ -206,23 +246,23 @@ const products = {
               number: "03",
               label: "Input Devices",
               title: "Every connected device, clearly seen.",
-              copy: "Battery, connection and hardware details for keyboards, mice and trackpads stay together instead of hiding across system panels.",
+              copy: "Connection and hardware details for keyboards, mice and trackpads stay together. Battery and charging information appears when the device reports it to macOS.",
               alt: "TraceHalo input-device view showing keyboard, mouse and trackpad information",
             },
             {
               id: "menu",
               number: "04",
-              label: "Menu Bar",
-              title: "There when needed. Quiet when not.",
-              copy: "Keep the metrics that matter in the menu bar. Open the deeper view with a click, then return to a calm desktop.",
-              alt: "TraceHalo menu bar monitor showing CPU, memory, GPU, storage and temperature",
+              label: "Menu Bar Layout",
+              title: "Keep only the metrics that matter.",
+              copy: "Open Menu Bar Layout from Live Monitor to choose your modules and preview them immediately. Monitoring continues after you close the main window.",
+              alt: "TraceHalo Menu Bar Layout showing available monitoring modules and an immediate layout preview",
             },
           ],
         },
         principles: {
           label: "TraceHalo principles",
           items: [
-            { title: "Native", copy: "Built for macOS 14+ and Apple silicon, with a focused native experience." },
+            { title: "Native", copy: "Supports macOS 14+, Apple silicon and Intel Macs, with a focused native experience." },
             { title: "Private", copy: "Monitoring stays on your Mac. No account, cloud service or analytics layer is required." },
             { title: "Open source", copy: "Apache 2.0 licensed and open for inspection, learning and contribution." },
           ],
@@ -521,6 +561,7 @@ export function App() {
   const product = products[activeProduct];
   const t = product.copy[language];
   const screenshots = product.screenshots;
+  const imageSrc = (image) => image.localizedSrc?.[language] ?? image.src;
 
   const chooseProduct = useCallback((nextProduct) => {
     if (!supportedProducts.includes(nextProduct)) return;
@@ -664,10 +705,22 @@ export function App() {
               {t.hero.secondLine && <><br />{t.hero.secondLine}</>}
             </h1>
             <p className="hero-intro">{t.hero.intro}</p>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#work">
-                {t.hero.primary} <ArrowRight aria-hidden="true" weight="bold" />
+            {product.release && (
+              <a className="release-preview" href="#release">
+                <span>{product.release.version}</span>
+                {t.release.preview} <ArrowRight aria-hidden="true" weight="bold" />
               </a>
+            )}
+            <div className="hero-actions">
+              {product.release ? (
+                <ExternalLink href={product.release.download} className="button button-primary" label={t.release.downloadLabel}>
+                  {t.hero.primary} <ArrowRight aria-hidden="true" weight="bold" />
+                </ExternalLink>
+              ) : (
+                <a className="button button-primary" href="#work">
+                  {t.hero.primary} <ArrowRight aria-hidden="true" weight="bold" />
+                </a>
+              )}
               <ExternalLink href={product.repo} className="button button-secondary" label={repoLabel}>
                 {t.hero.secondary} <GithubLogo aria-hidden="true" weight="fill" />
               </ExternalLink>
@@ -677,7 +730,7 @@ export function App() {
             <div className="hero-showcase-orbit" aria-hidden="true" />
             <div className="product-frame product-frame-hero">
               <img
-                src={product.heroImage.src}
+                src={imageSrc(product.heroImage)}
                 alt={t.hero.imageAlt}
                 width={product.heroImage.width}
                 height={product.heroImage.height}
@@ -701,6 +754,39 @@ export function App() {
             })}
           </div>
         </section>
+
+        {product.release && (
+          <section className="release-section" id="release" aria-labelledby="release-title">
+            <div className="release-inner section-container">
+              <div className="release-heading" data-reveal>
+                <p className="section-index">{t.release.eyebrow} · {product.release.version}</p>
+                <h2 id="release-title">{t.release.title}</h2>
+                <p>{t.release.summary}</p>
+                <div className="release-meta">
+                  <time dateTime={product.release.date}>{t.release.date}</time>
+                  <span>{t.release.requirements}</span>
+                </div>
+              </div>
+              <div className="release-highlights">
+                {t.release.items.map((item, index) => (
+                  <article key={item.title} data-reveal style={{ "--reveal-delay": `${index * 90}ms` }}>
+                    <span className="feature-number" aria-hidden="true">0{index + 1}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.copy}</p>
+                  </article>
+                ))}
+              </div>
+              <div className="release-actions" data-reveal>
+                <ExternalLink href={product.release.download} className="button button-primary" label={t.release.downloadLabel}>
+                  {t.release.download} <ArrowRight aria-hidden="true" weight="bold" />
+                </ExternalLink>
+                <ExternalLink href={product.release.notes} className="text-link" label={t.release.notesLabel}>
+                  {t.release.notes} <ArrowUpRight aria-hidden="true" weight="bold" />
+                </ExternalLink>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="project-story" id="work" aria-labelledby="project-title">
           <div className="story-intro section-container" data-reveal>
@@ -731,7 +817,7 @@ export function App() {
                     <span className="feature-halo" aria-hidden="true" />
                     <div className="product-frame">
                       <img
-                        src={screenshot.src}
+                        src={imageSrc(screenshot)}
                         alt={chapter.alt}
                         width={screenshot.width}
                         height={screenshot.height}
@@ -760,7 +846,7 @@ export function App() {
               <span className="status-orbit status-orbit-one" aria-hidden="true" />
               <span className="status-orbit status-orbit-two" aria-hidden="true" />
               <img
-                src={product.statusImage.src}
+                src={imageSrc(product.statusImage)}
                 alt={t.status.alt}
                 width={product.statusImage.width}
                 height={product.statusImage.height}
