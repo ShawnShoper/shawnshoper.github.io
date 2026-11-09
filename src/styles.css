@@ -717,6 +717,7 @@ img { display: block; max-width: 100%; }
 }
 
 .button-light { color: #ffffff; background: #14161b; box-shadow: 0 14px 28px rgba(17, 20, 27, 0.16); }
+.status-privacy { display: flex; width: fit-content; margin-top: 20px; }
 
 .status-product {
   position: relative;
