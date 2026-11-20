@@ -20,7 +20,7 @@ Chinese visitors see Chinese product screenshots where upstream provides them; E
 
 ## Peek content
 
-The page reflects [v0.3.1](https://github.com/ShawnShoper/peek/releases/tag/v0.3.1), published November 9, 2026 (Asia/Shanghai), and source commit `07b4a96dc5785c0679903f88b50888e5989d6ae5`. The release supports macOS 13+, Apple silicon and Intel.
+The page reflects [v0.4.1](https://github.com/ShawnShoper/peek/releases/tag/v0.4.1), published November 18, 2026 (Asia/Shanghai), and source commit `060b15329e27ee2319a7916adc4b645c71d2b003`. The release supports macOS 13+, Apple silicon and Intel.
 
 The existing screenshots and app icon match the official repository byte for byte:
 
