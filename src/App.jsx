@@ -286,12 +286,12 @@ const products = {
     repo: "https://github.com/ShawnShoper/peek",
     icon: "/assets/peek-icon.png",
     release: {
-      version: "v0.3.1",
-      date: "2026-11-09",
-      notes: "https://github.com/ShawnShoper/peek/releases/tag/v0.3.1",
-      download: "https://github.com/ShawnShoper/peek/releases/download/v0.3.1/PEEK-0.3.1-macOS-universal.dmg",
+      version: "v0.4.1",
+      date: "2026-11-18",
+      notes: "https://github.com/ShawnShoper/peek/releases/tag/v0.4.1",
+      download: "https://github.com/ShawnShoper/peek/releases/download/v0.4.1/PEEK-0.4.1-macOS-universal.dmg",
     },
-    privacy: "https://github.com/ShawnShoper/peek/blob/v0.3.1/PRIVACY.md",
+    privacy: "https://github.com/ShawnShoper/peek/blob/v0.4.1/PRIVACY.md",
     heroImage: { src: "/assets/peek-file-search.png", width: 1456, height: 1080 },
     screenshots: [
       { id: "search", src: "/assets/peek-file-search.png", width: 1456, height: 1080, focusX: "20%", focusY: "17%", focusScale: 1.22 },
@@ -305,7 +305,7 @@ const products = {
       zh: {
         meta: {
           title: "Peek — ShawnShoper",
-          description: "Peek 是适用于 macOS 13+ 的开源菜单栏工具，支持应用与文件查找、截图、OCR、剪贴板历史和翻译。v0.3.1 支持最多 100 万项索引，适配 Apple 芯片与 Intel。",
+          description: "Peek 是适用于 macOS 13+ 的开源菜单栏工具，支持应用与文件查找、截图、OCR、剪贴板历史和翻译。v0.4.1 支持最多 100 万项索引，适配 Apple 芯片与 Intel。",
         },
         hero: {
           eyebrow: "PEEK — 查找、截图与翻译",
@@ -314,7 +314,7 @@ const products = {
           suffix: "",
           secondLine: "",
           intro: "查找、截图、识别、剪贴板与翻译，需要时一键出现。",
-          primary: "下载 v0.3.1",
+          primary: "下载 v0.4.1",
           secondary: "查看项目源码",
           caption: "Peek 真实界面 · 文件与应用查找",
           imageAlt: "Peek 文件查找界面，展示应用搜索结果、预览信息和常用操作",
@@ -323,18 +323,18 @@ const products = {
         release: {
           eyebrow: "现已发布",
           preview: "看看这次的新变化",
-          title: "更大的索引，更清楚的进度。",
-          summary: "v0.3.1 将索引上限提升至 100 万项，持续跟进文件变化，让你知道搜索结果何时可用。",
-          date: "2026 年 11 月 9 日发布",
+          title: "查找文件时，回车打开当前结果。",
+          summary: "v0.4.1 修复了文件多时可能漏搜的问题，也改进了截图取消和富文本剪贴板历史。",
+          date: "2026 年 11 月 18 日发布",
           requirements: "macOS 13+ · Apple 芯片与 Intel",
           notes: "查看完整更新",
           download: "下载 Mac 版",
-          notesLabel: "在新窗口查看 Peek v0.3.1 官方发布说明",
-          downloadLabel: "下载 Peek v0.3.1 Mac 通用 DMG 安装包",
+          notesLabel: "在新窗口查看 Peek v0.4.1 官方发布说明",
+          downloadLabel: "下载 Peek v0.4.1 Mac 通用 DMG 安装包",
           items: [
-            { title: "100 万项，进度看得见。", copy: "应用先就绪，完成的目录随即进入搜索。统计、索引和权限受限分别显示；达到上限会提示结果不完整。" },
-            { title: "文件变了，索引跟上。", copy: "按授权目录中的文件变化增量更新，重启后继续处理未完成的更新。旧上限索引会自动补查，期间保留已提交的搜索结果。" },
-            { title: "截图与剪贴板，一起完善。", copy: "修复 macOS 26 微信窗口截图问题；跳过带保密、临时或 1Password 标记的剪贴板内容，仍可能记录未标记的敏感信息。" },
+            { title: "优先显示匹配的文件名", copy: "完整文件名和以搜索词开头的文件名排在前面。改完搜索词立即按回车，会打开当前结果。" },
+            { title: "取消截图后可以立即重截", copy: "取消区域或滚动截图后，旧选区会清除，下次截图可以重新选区。" },
+            { title: "在剪贴板历史中读到富文本", copy: "即使复制的内容只有 HTML 或 RTF 格式，历史记录也会显示正文和字符数。" },
           ],
         },
         story: {
@@ -402,7 +402,7 @@ const products = {
       en: {
         meta: {
           title: "Peek — ShawnShoper",
-          description: "Peek is an open-source menu bar utility for macOS 13+: file search, capture, OCR, clipboard history and translation. v0.3.1 indexes up to one million items on Apple silicon and Intel.",
+          description: "Peek is an open-source menu bar utility for macOS 13+: file search, capture, OCR, clipboard history and translation. v0.4.1 indexes up to one million items on Apple silicon and Intel.",
         },
         hero: {
           eyebrow: "PEEK — SEARCH, CAPTURE & TRANSLATE",
@@ -411,7 +411,7 @@ const products = {
           suffix: "",
           secondLine: "",
           intro: "Search, capture, recognize, recall and translate. A shortcut away.",
-          primary: "Download v0.3.1",
+          primary: "Download v0.4.1",
           secondary: "Explore the repository",
           caption: "Actual Peek interface · File and app search",
           imageAlt: "Peek file search showing app results, preview details and common actions",
@@ -420,18 +420,18 @@ const products = {
         release: {
           eyebrow: "NOW AVAILABLE",
           preview: "See what’s new",
-          title: "More room. Clearer progress.",
-          summary: "v0.3.1 raises the index limit to one million items, keeps up with file changes and shows when your search results are ready.",
-          date: "Released November 9, 2026",
+          title: "Press Return to open your current search result.",
+          summary: "v0.4.1 fixes missing search results in large indexes and improves capture cancellation and clipboard history for rich text.",
+          date: "Released November 18, 2026",
           requirements: "macOS 13+ · Apple silicon & Intel",
           notes: "Read the release notes",
           download: "Download for Mac",
-          notesLabel: "Read the official Peek v0.3.1 release notes in a new window",
-          downloadLabel: "Download the Peek v0.3.1 universal Mac DMG installer",
+          notesLabel: "Read the official Peek v0.4.1 release notes in a new window",
+          downloadLabel: "Download the Peek v0.4.1 universal Mac DMG installer",
           items: [
-            { title: "One million, with real progress.", copy: "Apps become ready first, and completed folders are searchable immediately. Counting, indexing and access limits have distinct states; reaching capacity is flagged as incomplete." },
-            { title: "Changed files. Updated results.", copy: "Changes in authorized folders update the index incrementally, with unfinished work resuming after a restart. Indexes that reached the old limit are rechecked while existing results stay available." },
-            { title: "Better capture and clipboard care.", copy: "Fixes WeChat capture on macOS 26 and skips clipboard changes marked confidential, transient or by 1Password. Unmarked sensitive content may still be recorded." },
+            { title: "Exact filenames rank first", copy: "Search prioritizes exact filenames and names that start with your search term. Press Return after changing the term to open a result from the current search." },
+            { title: "Start a fresh capture after cancelling", copy: "Cancelling a region or scrolling capture clears the old selection so you can choose a new area right away." },
+            { title: "Read rich text in clipboard history", copy: "Clipboard history shows the text and character count even when the copied content is available only as HTML or RTF." },
           ],
         },
         story: {
