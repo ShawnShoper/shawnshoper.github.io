@@ -6,9 +6,9 @@ The page is built with React and Vite, and all visible TraceHalo product imagery
 
 ## TraceHalo content
 
-The page reflects [v0.2.1 Beta](https://github.com/ShawnShoper/TraceHalo/releases/tag/v0.2.1), published November 9, 2026 (Asia/Shanghai). Release status and download links follow the published GitHub Release.
+The page reflects [v0.2.2 Beta, build 46](https://github.com/ShawnShoper/TraceHalo/releases/tag/v0.2.2), published November 25, 2026 (Asia/Shanghai). Version, date, release notes, universal DMG and SHA-256 links follow the published GitHub Release. The bilingual highlights cover window recovery, fixed percentage-chart scaling and device-status improvements. The RK R87PRO receiver is explicitly described as not reporting battery or charging fields.
 
-Official screenshots and the app icon are sourced from TraceHalo commit `93ad6dff94db0a32cff06f3d69a537f7c5dd7952`:
+Official screenshots and the app icon match TraceHalo release commit `74509afb065e941e447e488f44814da87105f396` byte for byte. The release continues to use the same published image files, so the originals and their dimensions are retained:
 
 - `docs/images/{en,zh-Hans}/overview.png`: the new Live Monitor home, used in the hero and monitoring chapter.
 - `docs/images/{en,zh-Hans}/live-monitor.png`: Menu Bar Layout, used in the menu bar chapter.
@@ -16,7 +16,7 @@ Official screenshots and the app icon are sourced from TraceHalo commit `93ad6df
 - `docs/images/en/input-devices.png`: the shared input-device image; upstream has no Chinese equivalent.
 - `Resources/TraceHalo-AppIcon-Source.png`: the official icon.
 
-Chinese visitors see Chinese product screenshots where upstream provides them; English visitors see the English originals. Image dimensions match the source files. Application-management changes are described using the published release notes.
+Chinese visitors see Chinese product screenshots where upstream provides them; English visitors see the English originals. Captions identify these as official project screenshots. The product story retains application management and its default local-data preservation behavior alongside the current release improvements.
 
 ## Peek content
 

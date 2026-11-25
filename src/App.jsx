@@ -72,10 +72,11 @@ const products = {
     repo: "https://github.com/ShawnShoper/TraceHalo",
     icon: "/assets/tracehalo-icon.png",
     release: {
-      version: "v0.2.1 Beta",
-      date: "2026-11-09",
-      notes: "https://github.com/ShawnShoper/TraceHalo/releases/tag/v0.2.1",
-      download: "https://github.com/ShawnShoper/TraceHalo/releases/download/v0.2.1/TraceHalo-0.2.1-arm64-x86_64.dmg",
+      version: "v0.2.2 Beta",
+      date: "2026-11-25",
+      notes: "https://github.com/ShawnShoper/TraceHalo/releases/tag/v0.2.2",
+      download: "https://github.com/ShawnShoper/TraceHalo/releases/download/v0.2.2/TraceHalo-0.2.2-arm64-x86_64.dmg",
+      checksum: "https://github.com/ShawnShoper/TraceHalo/releases/download/v0.2.2/TraceHalo-0.2.2-arm64-x86_64.dmg.sha256",
     },
     heroImage: { src: "/assets/tracehalo-overview.png", localizedSrc: { zh: "/assets/tracehalo-overview-zh.png" }, width: 1320, height: 840 },
     screenshots: [
@@ -90,7 +91,7 @@ const products = {
       zh: {
         meta: {
           title: "TraceHalo — ShawnShoper",
-          description: "TraceHalo 是由 AI 编程实现的免费开源 Mac 系统监控工具。统一查看实时状态、资源趋势与应用信息，支持 macOS 14+、Apple 芯片和 Intel。",
+          description: "TraceHalo v0.2.2 Beta 是由 AI 编程实现的免费开源 Mac 系统监控工具，改善窗口恢复、图表比例与设备充电状态识别。支持 macOS 14+、Apple 芯片和 Intel。",
         },
         hero: {
           eyebrow: "TRACEHALO — 原生 MAC 系统监控",
@@ -99,33 +100,35 @@ const products = {
           suffix: "",
           secondLine: "",
           intro: "实时状态、资源趋势与应用管理，在一个原生工作空间里看清。",
-          primary: "下载 v0.2.1 Beta",
+          primary: "下载 v0.2.2 Beta",
           secondary: "查看项目源码",
-          caption: "TraceHalo 真实界面 · 新版实时监控首页",
+          caption: "TraceHalo 官方界面截图 · 实时监控总览",
           imageAlt: "TraceHalo 中文实时监控首页，集中展示 CPU、内存、GPU、存储、网络、散热与资源历史",
           scroll: "向下滚动，进入产品",
         },
         release: {
           eyebrow: "现已发布",
           preview: "看看这次的新变化",
-          title: "应用管理，每一步都更清楚。",
-          summary: "从查看应用信息，到选择保留的数据，再到最后确认，v0.2.1 让每一步都清楚可见。",
-          date: "2026 年 11 月 9 日发布",
+          title: "读数更清楚，窗口更可靠。",
+          summary: "v0.2.2 改善 Dock 与菜单栏恢复主窗口的体验，修正百分比曲线比例，并改善触控板充电状态识别。",
+          date: "2026 年 11 月 25 日发布",
           requirements: "macOS 14+ · Apple 芯片与 Intel",
           notes: "查看完整更新",
           download: "下载 Mac 版",
-          notesLabel: "在新窗口查看 TraceHalo v0.2.1 Beta 官方发布说明",
-          downloadLabel: "下载 TraceHalo v0.2.1 Beta Mac 通用 DMG 安装包",
+          notesLabel: "在新窗口查看 TraceHalo v0.2.2 Beta 官方发布说明",
+          downloadLabel: "下载 TraceHalo v0.2.2 Beta Mac 通用 DMG 安装包",
+          checksum: "SHA-256 校验文件",
+          checksumLabel: "下载 TraceHalo v0.2.2 Beta DMG 安装包的 SHA-256 校验文件",
           items: [
-            { title: "应用信息，一行读完。", copy: "图标、名称、版本和磁盘占用整齐对齐。每个应用都有明确的卸载入口，选项在独立页面打开。" },
-            { title: "保留什么，由你选择。", copy: "卸载默认保留本机数据。选择清理时，可查看归属与影响；最终确认会完整列出待移除路径和保留清单。" },
-            { title: "权限准备，按需完成。", copy: "首次引导可以跳过，之后可在设置中继续。主窗口的冷启动、关闭后重开和菜单栏返回也得到改善。" },
+            { title: "主窗口，随时回到眼前。", copy: "从 Dock 或菜单栏重新打开，恢复隐藏、最小化或移到屏幕外的窗口。关闭主窗口后，也能重新创建。" },
+            { title: "百分比，按真实比例显示。", copy: "CPU 等菜单栏百分比曲线固定使用 0–100% 刻度，移除最低 4% 高度限制；11% 的读数对应约 11% 的图形高度。" },
+            { title: "设备状态，说明更清楚。", copy: "修复已验证 Magic Trackpad 的充电识别，设备信息每 3 秒刷新。当前已验证的 RK R87PRO 2.4G 接收器仍未上报电量与充电数据。" },
           ],
         },
         story: {
           eyebrow: "01 / TRACEHALO",
           title: "一款自由、开源的 Mac 系统监控工具。",
-          summary: "CPU、内存、GPU、存储、网络与散热集中在同一首页。点开卡片查看详情，用最近 15、30 或 60 分钟的资源趋势理解变化，再把关心的指标留在菜单栏。",
+          summary: "CPU、内存、GPU、存储、网络与散热集中在同一首页，用 15、30 或 60 分钟的资源趋势理解变化。应用管理可查看版本和磁盘占用；卸载默认保留本机数据，移除前需审阅并最终确认。",
           repo: "查看 TraceHalo 源码",
           progress: "产品章节",
           screenshot: "真实项目截图",
@@ -136,7 +139,7 @@ const products = {
               label: "实时监控",
               title: "系统状态，一眼看清。",
               copy: "实时读数、资源趋势与事件记录放在一起。点开资源卡片，即可原地查看核心、进程、磁盘、网络接口或传感器详情。",
-              alt: "TraceHalo 新版实时监控首页，展示六类资源卡片、历史趋势与事件记录",
+              alt: "TraceHalo 实时监控首页，展示六类资源卡片、历史趋势与事件记录",
             },
             {
               id: "storage",
@@ -151,7 +154,7 @@ const products = {
               number: "03",
               label: "输入设备",
               title: "连接的设备，清楚可见。",
-              copy: "键盘、鼠标和触控板的连接方式与硬件信息集中展示。设备向 macOS 提供电量或充电信息时，也会一并显示。",
+              copy: "键盘、鼠标和触控板的信息每 3 秒刷新，设备上报电量与充电数据时才显示。当前已验证的 RK R87PRO 2.4G 接收器仍未提供这些字段。",
               alt: "TraceHalo 输入设备页面，展示键盘、鼠标和触控板信息",
             },
             {
@@ -159,7 +162,7 @@ const products = {
               number: "04",
               label: "菜单栏布局",
               title: "只留下，你关心的指标。",
-              copy: "从实时监控顶部打开「菜单栏布局」，自由选择模块并即时预览。关闭主窗口后，菜单栏监控仍会继续。",
+              copy: "从实时监控顶部打开「菜单栏布局」，自由选择模块并即时预览。CPU 等百分比曲线按固定 0–100% 刻度显示，0% 回到底线。",
               alt: "TraceHalo 菜单栏布局页面，展示可选监控模块与即时布局预览",
             },
           ],
@@ -174,8 +177,8 @@ const products = {
         },
         status: {
           eyebrow: "始终触手可及",
-          title: "细节留在后台，直到你需要它。",
-          copy: "自由选择菜单栏显示的模块，随时查看实时摘要；只有需要深入时，才打开完整视图。",
+          title: "需要时，窗口回到眼前。",
+          copy: "关闭主窗口后，监控仍在菜单栏继续。需要完整视图时，从 Dock 或菜单栏重新打开；隐藏、最小化或移到屏幕外的窗口也会恢复。",
           action: "了解 TraceHalo",
           alt: "TraceHalo 菜单栏详情，显示实时系统监控数据",
           caption: "TraceHalo 真实菜单栏界面",
@@ -185,7 +188,7 @@ const products = {
       en: {
         meta: {
           title: "TraceHalo — ShawnShoper",
-          description: "TraceHalo is a free, open-source Mac system monitor built with AI programming. See live status, resource trends and app details on macOS 14+, Apple silicon and Intel.",
+          description: "TraceHalo v0.2.2 Beta is a free, open-source Mac monitor built with AI programming. Improved window recovery, percentage charts and charging status on macOS 14+, Apple silicon and Intel.",
         },
         hero: {
           eyebrow: "TRACEHALO — NATIVE MAC SYSTEM MONITOR",
@@ -194,33 +197,35 @@ const products = {
           suffix: "",
           secondLine: "",
           intro: "Live status, resource trends and app management. Clear in one native workspace.",
-          primary: "Download v0.2.1 Beta",
+          primary: "Download v0.2.2 Beta",
           secondary: "Explore the repository",
-          caption: "Actual TraceHalo interface · New Live Monitor home",
+          caption: "Official TraceHalo screenshot · Live Monitor overview",
           imageAlt: "TraceHalo Live Monitor home in English with CPU, memory, GPU, storage, network, cooling and resource history",
           scroll: "Scroll to enter the product",
         },
         release: {
           eyebrow: "NOW AVAILABLE",
           preview: "See what’s new",
-          title: "App management, made clear.",
-          summary: "From reviewing app details to choosing what stays and confirming what goes, v0.2.1 makes every step easier to follow.",
-          date: "Released November 9, 2026",
+          title: "Clear charts. Better recovery.",
+          summary: "v0.2.2 improves reopening the main window from the Dock and menu bar, corrects percentage-chart scaling and improves trackpad charging recognition.",
+          date: "Released November 25, 2026",
           requirements: "macOS 14+ · Apple silicon & Intel",
           notes: "Read the release notes",
           download: "Download for Mac",
-          notesLabel: "Read the official TraceHalo v0.2.1 Beta release notes in a new window",
-          downloadLabel: "Download the TraceHalo v0.2.1 Beta universal Mac DMG installer",
+          notesLabel: "Read the official TraceHalo v0.2.2 Beta release notes in a new window",
+          downloadLabel: "Download the TraceHalo v0.2.2 Beta universal Mac DMG installer",
+          checksum: "SHA-256 checksum",
+          checksumLabel: "Download the SHA-256 checksum for the TraceHalo v0.2.2 Beta DMG installer",
           items: [
-            { title: "App details, in one row.", copy: "Icons, names, versions and disk usage line up clearly. Every app has a visible uninstall action, with options in a separate view." },
-            { title: "Choose what stays.", copy: "Local data stays by default. Review ownership and impact before selecting files; the final confirmation lists every removal target and what you’re keeping." },
-            { title: "Set up access when needed.", copy: "Skip the first-run guide and return in Settings whenever you need it. Cold starts, reopening the window and returning from the menu bar are improved too." },
+            { title: "Your window, back in view.", copy: "Reopen from the Dock or menu bar to restore a hidden, minimized or off-screen window. A closed main window can be created again." },
+            { title: "Percentages, in proportion.", copy: "CPU and other menu bar percentage curves use a fixed 0–100% scale. Removing the 4% minimum height means an 11% reading appears at about 11% of the chart height." },
+            { title: "Clearer device status.", copy: "Fixes charging recognition on verified Magic Trackpad hardware and refreshes device details every 3 seconds. The verified RK R87PRO 2.4G receiver still does not report battery or charging data." },
           ],
         },
         story: {
           eyebrow: "01 / TRACEHALO",
           title: "A free, open-source system monitor for Mac.",
-          summary: "CPU, memory, GPU, storage, network and cooling share one home page. Expand a card for details, understand changes with 15, 30 or 60 minutes of resource history, and keep your key metrics in the menu bar.",
+          summary: "CPU, memory, GPU, storage, network and cooling share one home page, with 15, 30 or 60 minutes of resource history. App management shows versions and disk usage; local data stays by default, with review and final confirmation before removal.",
           repo: "Explore TraceHalo",
           progress: "Product chapter",
           screenshot: "Actual project screenshot",
@@ -246,7 +251,7 @@ const products = {
               number: "03",
               label: "Input Devices",
               title: "Every connected device, clearly seen.",
-              copy: "Connection and hardware details for keyboards, mice and trackpads stay together. Battery and charging information appears when the device reports it to macOS.",
+              copy: "Keyboard, mouse and trackpad details refresh every 3 seconds. Battery and charging appear only when the device reports them; the verified RK R87PRO 2.4G receiver still does not provide these fields.",
               alt: "TraceHalo input-device view showing keyboard, mouse and trackpad information",
             },
             {
@@ -254,7 +259,7 @@ const products = {
               number: "04",
               label: "Menu Bar Layout",
               title: "Keep only the metrics that matter.",
-              copy: "Open Menu Bar Layout from Live Monitor to choose your modules and preview them immediately. Monitoring continues after you close the main window.",
+              copy: "Open Menu Bar Layout from Live Monitor to choose and preview your modules. CPU and other percentage curves use a fixed 0–100% scale, with 0% returning to the baseline.",
               alt: "TraceHalo Menu Bar Layout showing available monitoring modules and an immediate layout preview",
             },
           ],
@@ -269,8 +274,8 @@ const products = {
         },
         status: {
           eyebrow: "ALWAYS WITHIN REACH",
-          title: "The details stay out of the way until you ask.",
-          copy: "Choose exactly what appears in the menu bar, check the live summary, and open deeper views only when you need them.",
+          title: "Your window, back in view.",
+          copy: "Monitoring continues in the menu bar after the main window closes. Reopen from the Dock or menu bar for the full view, including restoring hidden, minimized and off-screen windows.",
           action: "See TraceHalo",
           alt: "TraceHalo menu bar detail showing live system monitoring data",
           caption: "Actual TraceHalo menu bar interface",
@@ -828,6 +833,11 @@ export function App() {
                 <ExternalLink href={product.release.notes} className="text-link" label={t.release.notesLabel}>
                   {t.release.notes} <ArrowUpRight aria-hidden="true" weight="bold" />
                 </ExternalLink>
+                {product.release.checksum && (
+                  <ExternalLink href={product.release.checksum} className="text-link" label={t.release.checksumLabel}>
+                    {t.release.checksum}
+                  </ExternalLink>
+                )}
               </div>
             </div>
           </section>
